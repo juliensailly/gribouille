@@ -61,7 +61,11 @@
                   <RadioMenuItem mnemonicParsing="false" text="Etoile" toggleGroup="$outil_group" />
                </items>
           </Menu>
-          <Menu mnemonicParsing="false" text="Aide" />
+          <Menu mnemonicParsing="false" text="Aide">
+               <items>
+                  <MenuItem mnemonicParsing="false" text="A propos" />
+               </items>
+          </Menu>
         </menus>
       </MenuBar>
    </top>
