@@ -1,16 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.layout.VBox?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ToggleButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ToggleButton?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.control.ToolBar?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER" spacing="20.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.gon.project.PrimaryController">
+<VBox alignment="CENTER" prefHeight="377.0" prefWidth="532.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="iut.gon.project.PrimaryController">
    <children>
+      <ToolBar prefHeight="40.0" prefWidth="200.0">
+         <items>
+            <ToggleButton mnemonicParsing="false" selected="true" text="ToggleButton">
+               <toggleGroup>
+                  <ToggleGroup fx:id="group" />
+               </toggleGroup></ToggleButton>
+            <ToggleButton mnemonicParsing="false" text="ToggleButton" toggleGroup="$group" />
+            <ToggleButton mnemonicParsing="false" text="ToggleButton" toggleGroup="$group" />
+            <ToggleButton mnemonicParsing="false" text="ToggleButton" />
+         </items>
+      </ToolBar>
       <Label text="Primary View" />
-      <Button fx:id="primaryButton" text="Switch to Secondary View" onAction="#switchToSecondary"/>
-      <ToggleButton text="ON/OFF"/>
+      <Button fx:id="primaryButton" onAction="#switchToSecondary" text="Switch to Secondary View" />
+      <ToggleButton text="ON/OFF">
+         <font>
+            <Font name="Asana Math" size="61.0" />
+         </font></ToggleButton>
    </children>
    <padding>
       <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
