@@ -44,6 +44,8 @@ public class TP2App extends Application {
 
 		stage.setTitle("Gestion de groupe");
 		stage.setScene(scene);
+		stage.setWidth(800);
+		stage.setHeight(400);
 		stage.show();
 	}
 
@@ -92,12 +94,12 @@ public class TP2App extends Application {
 			Platform.exit();
 		});
 		menu.get(1).getItems().get(0).addEventHandler(ActionEvent.ACTION, (gestion) -> {
-			Alert about = new Alert(AlertType.NONE, "", ButtonType.CLOSE);
+			Alert about = new Alert(AlertType.NONE);
+			about.getButtonTypes().add(new ButtonType("Done"));
 			about.setContentText("Application developped by Julien Sailly");
 			about.setTitle("About");
 			about.show();
 		});
-		
 	}
 	
 	
@@ -106,7 +108,18 @@ public class TP2App extends Application {
 	 * Remplit la liste de gauche avec des valeurs Active le bouton "Ajouter tout"
 	 */
 	private void prepareListe() {
+		gauche.getItems().addAll("Alenso Lopes", 
+				"Guillaume Bergerot", 
+				"Victor Friboulet",
+				"Julien Ait Azzouzene",
+				"Julien Sailly",
+				"Clément Baratin",
+				"Cyprien de la Poëze d'Harambure",
+				"Gabrielle Harang",
+				"Guilhem Saint-Gaudin",
+				"Andgel Brissaud");
 		// TODO active le bouton "Ajouter tout"
+		ajouteTout.setDisable(false);
 	}
 
 	private void extraitIds(Scene scene) {
