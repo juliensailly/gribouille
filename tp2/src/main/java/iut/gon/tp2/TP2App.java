@@ -4,7 +4,6 @@ import java.io.IOException;
 
 import javafx.application.Application;
 import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -61,6 +60,28 @@ public class TP2App extends Application {
 		ajouteTout.setOnAction(this::onAjouteTout);
 		retireTout.setOnAction(this::onRetireTout);
 		// TODO actions des deux boutons centraux
+		versGauche.setOnAction(this::transfertVersGauche);
+		versDroite.setOnAction(this::transfertVersDroite);
+	}
+	
+	/** Ajoute l'élément de la liste de droite sélectionné à la liste de gauche et le supprime à droite	 */
+	private void transfertVersGauche(ActionEvent actionevent) {
+		int selectedIndex = droite.getSelectionModel().getSelectedIndex();
+		if (selectedIndex != -1) {
+			gauche.getItems().add(droite.getItems().get(selectedIndex));
+			droite.getItems().remove(selectedIndex);
+			droite.getSelectionModel().clearSelection();
+		}
+	}
+	
+	/** Ajoute l'élément de la liste de gauche sélectionné à la liste de droite et le supprime à gauche	 */
+	private void transfertVersDroite(ActionEvent actionevent) {
+		int selectedIndex = gauche.getSelectionModel().getSelectedIndex();
+		if (selectedIndex != -1) {
+			droite.getItems().add(gauche.getItems().get(selectedIndex));
+			gauche.getItems().remove(selectedIndex);
+			gauche.getSelectionModel().clearSelection();
+		}
 	}
 
 	/**
@@ -103,7 +124,7 @@ public class TP2App extends Application {
 		menu.get(1).getItems().get(0).addEventHandler(ActionEvent.ACTION, (gestion) -> {
 			Alert about = new Alert(AlertType.NONE);
 			about.getButtonTypes().add(new ButtonType("Done"));
-			about.setContentText("Application developped by Julien Sailly");
+			about.setContentText("JavaFX application developped by Julien Sailly");
 			about.setTitle("About");
 			about.show();
 		});
