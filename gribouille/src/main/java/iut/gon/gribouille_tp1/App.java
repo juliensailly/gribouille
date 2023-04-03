@@ -3,13 +3,16 @@ package iut.gon.gribouille_tp1;
 import java.io.IOException;
 
 import javafx.application.Application;
-import javafx.event.EventType;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.image.Image;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Shape;
 import javafx.stage.Stage;
 
 /**
@@ -39,6 +42,16 @@ public class App extends Application {
 			dessin.getGraphicsContext2D().strokeLine(prevX, prevY, appui.getX(), appui.getY());
 			this.prevX = appui.getX();
 			this.prevY = appui.getY();
+		});
+		
+		Pane pane = (Pane) dessin.getParent();
+		pane.addEventHandler(MouseEvent.MOUSE_PRESSED, (clickDroit) -> {
+			if (clickDroit.getButton() == MouseButton.SECONDARY) {
+				Circle c = new Circle(clickDroit.getX(), clickDroit.getY(), 5);
+				c.setMouseTransparent(true);
+				pane.getChildren().add(c);
+				clickDroit.consume();
+			}
 		});
 	}
 
