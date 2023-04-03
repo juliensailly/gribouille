@@ -150,7 +150,7 @@
    <center>
       <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Canvas height="348.0" layoutX="-2.0" width="471.0" />
+            <Canvas height="346.0" layoutX="-2.0" width="487.0" />
          </children>
       </Pane>
    </center>
