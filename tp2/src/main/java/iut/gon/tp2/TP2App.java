@@ -1,6 +1,7 @@
 package iut.gon.tp2;
 
 import java.io.IOException;
+import java.util.Optional;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -52,6 +53,14 @@ public class TP2App extends Application {
 	private void prepareFermeture(Stage stage) {
 		stage.setOnCloseRequest(event -> {
 			// TODO confirmer ou consommer l'événement
+			Alert closeConfirmation = new Alert(AlertType.CONFIRMATION);
+			closeConfirmation.setContentText("Do you really want to exit ?");
+			Optional<ButtonType> choice = closeConfirmation.showAndWait();
+			if (!choice.isPresent()) {
+				event.consume();
+			} else if (choice.get().equals(ButtonType.CANCEL)) {
+				event.consume();
+			}
 		});
 	}
 
@@ -63,8 +72,11 @@ public class TP2App extends Application {
 		versGauche.setOnAction(this::transfertVersGauche);
 		versDroite.setOnAction(this::transfertVersDroite);
 	}
-	
-	/** Ajoute l'élément de la liste de droite sélectionné à la liste de gauche et le supprime à droite	 */
+
+	/**
+	 * Ajoute l'élément de la liste de droite sélectionné à la liste de gauche et le
+	 * supprime à droite
+	 */
 	private void transfertVersGauche(ActionEvent actionevent) {
 		int selectedIndex = droite.getSelectionModel().getSelectedIndex();
 		if (selectedIndex != -1) {
@@ -73,8 +85,11 @@ public class TP2App extends Application {
 			droite.getSelectionModel().clearSelection();
 		}
 	}
-	
-	/** Ajoute l'élément de la liste de gauche sélectionné à la liste de droite et le supprime à gauche	 */
+
+	/**
+	 * Ajoute l'élément de la liste de gauche sélectionné à la liste de droite et le
+	 * supprime à gauche
+	 */
 	private void transfertVersDroite(ActionEvent actionevent) {
 		int selectedIndex = gauche.getSelectionModel().getSelectedIndex();
 		if (selectedIndex != -1) {
@@ -114,7 +129,7 @@ public class TP2App extends Application {
 		// TODO Remplir la barre de menus
 		ObservableList<Menu> menu = menus.getMenus();
 		menu.addAll(new Menu("_Fichiers"), new Menu("_Aide"));
-		
+
 		menu.get(0).getItems().add(new MenuItem("Exit"));
 		menu.get(1).getItems().add(new MenuItem("About"));
 		// Ajout des Events Listener
@@ -129,23 +144,14 @@ public class TP2App extends Application {
 			about.show();
 		});
 	}
-	
-	
 
 	/**
 	 * Remplit la liste de gauche avec des valeurs Active le bouton "Ajouter tout"
 	 */
 	private void prepareListe() {
-		gauche.getItems().addAll("Alenso Lopes", 
-				"Guillaume Bergerot", 
-				"Victor Friboulet",
-				"Julien Ait Azzouzene",
-				"Julien Sailly",
-				"Clément Baratin",
-				"Cyprien de la Poëze d'Harambure",
-				"Gabrielle Harang",
-				"Guilhem Saint-Gaudin",
-				"Andgel Brissaud");
+		gauche.getItems().addAll("Alenso Lopes", "Guillaume Bergerot", "Victor Friboulet", "Julien Ait Azzouzene",
+				"Julien Sailly", "Clément Baratin", "Cyprien de la Poëze d'Harambure", "Gabrielle Harang",
+				"Guilhem Saint-Gaudin", "Andgel Brissaud");
 		// TODO active le bouton "Ajouter tout"
 		ajouteTout.setDisable(false);
 	}
