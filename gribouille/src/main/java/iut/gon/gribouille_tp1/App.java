@@ -1,5 +1,6 @@
 package iut.gon.gribouille_tp1;
 
+
 import java.io.IOException;
 
 import javafx.application.Application;

@@ -17,7 +17,7 @@ public class Dialogues {
 	}
 	
 
-	public static void prepareFermeture(Stage stage) {
+	public static void prepareFermeture(@SuppressWarnings("exports") Stage stage) {
 		stage.setOnCloseRequest(event -> {
 			if (!confirmation()) {
                     event.consume();
