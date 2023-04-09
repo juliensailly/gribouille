@@ -29,17 +29,6 @@ public class App extends Application {
 		stage.getIcons().add(new Image("file:src\\main\\resources\\iut\\gon\\gribouille\\icon.jpg"));
 		stage.show();
 		Dialogues.prepareFermeture(stage);
-
-		Canvas dessin = (Canvas) scene.lookup("Canvas");
-		dessin.addEventHandler(MouseEvent.MOUSE_PRESSED, (click) -> {
-			this.prevX = click.getX();
-			this.prevY = click.getY();
-		});
-		dessin.addEventHandler(MouseEvent.MOUSE_DRAGGED, (appui) -> {
-			dessin.getGraphicsContext2D().strokeLine(prevX, prevY, appui.getX(), appui.getY());
-			this.prevX = appui.getX();
-			this.prevY = appui.getY();
-		});
 	}
 
 	static void setRoot(String fxml) throws IOException {

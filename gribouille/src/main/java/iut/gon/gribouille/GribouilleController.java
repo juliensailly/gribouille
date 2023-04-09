@@ -9,10 +9,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.control.ColorPicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 
-public class BorderPaneController implements Initializable {
+public class GribouilleController implements Initializable {
 	@FXML
 	private Label XlabelValue;
 	@FXML
@@ -49,9 +50,23 @@ public class BorderPaneController implements Initializable {
 	private Rectangle white;
 	@FXML
 	private Rectangle yellow;
+	
+	private double prevX;
+	private double prevY;
 
 	public void initialize(URL url, ResourceBundle ressourceBundle) {
 		centralCanva.widthProperty().bind(central_pane.widthProperty());
 		centralCanva.heightProperty().bind(central_pane.heightProperty());
+	}
+	
+	public void onMousePressed(MouseEvent evt) {
+		this.prevX = evt.getX();
+		this.prevY = evt.getY();
+	}
+	
+	public void onMouseDragged(MouseEvent evt) {
+		centralCanva.getGraphicsContext2D().strokeLine(prevX, prevY, evt.getX(), evt.getY());
+		this.prevX = evt.getX();
+		this.prevY = evt.getY();
 	}
 }
