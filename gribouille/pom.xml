@@ -41,7 +41,7 @@
                         <!-- Usage: mvn clean javafx:run -->
                         <id>default-cli</id>
                         <configuration>
-                            <mainClass>iut.gon.gribouille_tp1.App</mainClass>
+                            <mainClass>iut.gon.gribouille.App</mainClass>
                         </configuration>
                     </execution>
                 </executions>

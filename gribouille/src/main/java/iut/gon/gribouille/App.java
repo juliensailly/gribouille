@@ -1,4 +1,4 @@
-package iut.gon.gribouille_tp1;
+package iut.gon.gribouille;
 
 
 import java.io.IOException;
@@ -22,11 +22,11 @@ public class App extends Application {
 	private double prevY;
 
 	@Override
-	public void start(Stage stage) throws IOException {
+	public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
 		scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
 		stage.setScene(scene);
 		stage.setTitle("Gribouille");
-		stage.getIcons().add(new Image("file:src\\main\\resources\\iut\\gon\\gribouille_tp1\\icon.jpg"));
+		stage.getIcons().add(new Image("file:src\\main\\resources\\iut\\gon\\gribouille\\icon.jpg"));
 		stage.show();
 		Dialogues.prepareFermeture(stage);
 

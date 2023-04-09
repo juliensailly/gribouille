@@ -1,4 +1,4 @@
-package iut.gon.gribouille_tp1;
+package iut.gon.gribouille;
 
 import java.util.Optional;
 
