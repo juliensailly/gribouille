@@ -3,6 +3,7 @@ package iut.gon.gribouille;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+import iut.gon.modele.Dessin;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -50,23 +51,29 @@ public class GribouilleController implements Initializable {
 	private Rectangle white;
 	@FXML
 	private Rectangle yellow;
-	
+
 	private double prevX;
 	private double prevY;
+	
+	private Dessin dessin;
 
 	public void initialize(URL url, ResourceBundle ressourceBundle) {
 		centralCanva.widthProperty().bind(central_pane.widthProperty());
 		centralCanva.heightProperty().bind(central_pane.heightProperty());
 	}
-	
+
 	public void onMousePressed(MouseEvent evt) {
 		this.prevX = evt.getX();
 		this.prevY = evt.getY();
 	}
-	
+
 	public void onMouseDragged(MouseEvent evt) {
 		centralCanva.getGraphicsContext2D().strokeLine(prevX, prevY, evt.getX(), evt.getY());
 		this.prevX = evt.getX();
 		this.prevY = evt.getY();
+	}
+
+	public GribouilleController(Dessin dessin) {
+		this.dessin = dessin;
 	}
 }

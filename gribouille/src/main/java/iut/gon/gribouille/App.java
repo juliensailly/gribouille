@@ -17,8 +17,6 @@ import javafx.stage.Stage;
 public class App extends Application {
 
 	private static Scene scene;
-	private double prevX;
-	private double prevY;
 
 	@Override
 	public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
@@ -28,6 +26,9 @@ public class App extends Application {
 		stage.getIcons().add(new Image("file:src\\main\\resources\\iut\\gon\\gribouille\\icon.jpg"));
 		stage.show();
 		Dialogues.prepareFermeture(stage);
+		
+		Dessin dessin = new Dessin();
+		GribouilleController gc = new GribouilleController(dessin);
 	}
 
 	static void setRoot(String fxml) throws IOException {
