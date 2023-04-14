@@ -5,11 +5,9 @@ import java.util.ResourceBundle;
 
 import iut.gon.modele.Dessin;
 import iut.gon.modele.Figure;
-import iut.gon.modele.Point;
 import iut.gon.modele.Trace;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.canvas.Canvas;
@@ -75,13 +73,16 @@ public class GribouilleController implements Initializable {
 	}
 
 	private void reDraw() {
-		centralCanva.getGraphicsContext2D().clearRect(0, 0, centralCanva.getWidth(), centralCanva.getHeight()); // Pour conserver des traits fins
+		// Permet de conserver des traits fins
+		centralCanva.getGraphicsContext2D().clearRect(0, 0, centralCanva.getWidth(), centralCanva.getHeight()); 
+
 		for (Figure trace : dessin.getFigures()) {
 			prevX.set(trace.getPoints().get(0).getX());
 			prevY.set(trace.getPoints().get(0).getY());
+
 			for (int i = 1; i < trace.getPoints().size(); i++) {
-				centralCanva.getGraphicsContext2D().strokeLine(prevX.get(), prevY.get(), trace.getPoints().get(i).getX(),
-						trace.getPoints().get(i).getY());
+				centralCanva.getGraphicsContext2D().strokeLine(prevX.get(), prevY.get(),
+						trace.getPoints().get(i).getX(), trace.getPoints().get(i).getY());
 				prevX.set(trace.getPoints().get(i).getX());
 				prevY.set(trace.getPoints().get(i).getY());
 			}
@@ -100,6 +101,18 @@ public class GribouilleController implements Initializable {
 		this.prevX.set(evt.getX());
 		this.prevY.set(evt.getY());
 		dessin.getFigures().get(index).addPoint(evt.getX(), evt.getY());
+	}
+
+	public void onMouseMoved(MouseEvent evt) {
+		// On teste la longueur des coordonnées pour éviter les problèmes d'affichage
+		this.XlabelValue.textProperty()
+				.set(Double.toString(evt.getX()).length() > 5 ? 
+						Double.toString(evt.getX()).substring(0, 5)
+						: Double.toString(evt.getX()));
+		this.YlabelValue.textProperty()
+		.set(Double.toString(evt.getY()).length() > 5 ? 
+				Double.toString(evt.getY()).substring(0, 5)
+				: Double.toString(evt.getY()));
 	}
 
 	public GribouilleController() {

@@ -150,7 +150,7 @@
    <center>
       <Pane fx:id="central_pane" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
          <children>
-            <Canvas fx:id="centralCanva" height="1000.0" layoutX="-2.0" width="1000.0" onMousePressed="#onMousePressed" onMouseDragged="#onMouseDragged"/>
+            <Canvas fx:id="centralCanva" height="1000.0" layoutX="-2.0" onMouseDragged="#onMouseDragged" onMouseMoved="#onMouseMoved" onMousePressed="#onMousePressed" width="1000.0" />
          </children>
       </Pane>
    </center>

@@ -23,15 +23,14 @@ public class App extends Application {
 	public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
 		scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
 		stage.setScene(scene);
-		stage.setTitle("Gribouille");
-		stage.getIcons().add(new Image("file:src\\main\\resources\\iut\\gon\\gribouille\\icon.jpg"));
+		stage.getIcons().add(new Image("file:src\\main\\resources\\iut\\gon\\gribouille\\icon.png"));
 		stage.show();
 		Dialogues.prepareFermeture(stage);
 
 		Dessin dessin = new Dessin();
 		GribouilleController gc = new GribouilleController(dessin);
-		
 		stage.titleProperty().bind(dessin.nomDuFichierProperty());
+		
 		
 	}
 
@@ -48,4 +47,4 @@ public class App extends Application {
 		launch();
 	}
 
-} // TO-DO : Finir 2.4 Les liaisons dangereuses
+}
