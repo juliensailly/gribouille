@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import iut.gon.modele.Dessin;
 import javafx.application.Application;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -30,6 +31,8 @@ public class App extends Application {
 		Dessin dessin = new Dessin();
 		GribouilleController gc = new GribouilleController(dessin);
 		
+		stage.titleProperty().bind(dessin.nomDuFichierProperty());
+		
 	}
 
 	static void setRoot(String fxml) throws IOException {
@@ -45,4 +48,4 @@ public class App extends Application {
 		launch();
 	}
 
-}
+} // TO-DO : Finir 2.4 Les liaisons dangereuses
