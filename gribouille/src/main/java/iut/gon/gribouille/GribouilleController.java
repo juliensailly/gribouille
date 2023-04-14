@@ -19,6 +19,11 @@ import javafx.scene.layout.Pane;
 import javafx.scene.shape.Rectangle;
 import javafx.util.converter.NumberStringConverter;
 
+/**
+ * Contrôleur de l'application Gribouille.
+ * 
+ * @author Julien Sailly
+ */
 public class GribouilleController implements Initializable {
 	@FXML
 	private Label XlabelValue;
@@ -63,6 +68,9 @@ public class GribouilleController implements Initializable {
 	private Dessin dessin;
 	private static int index;
 
+	/**
+	 * Fonction permettant d'initialiser l'application FXML avant son chargement.
+	 */
 	public void initialize(URL url, ResourceBundle ressourceBundle) {
 		centralCanva.widthProperty().bind(central_pane.widthProperty());
 		centralCanva.heightProperty().bind(central_pane.heightProperty());
@@ -72,8 +80,11 @@ public class GribouilleController implements Initializable {
 		Bindings.bindBidirectional(YlabelValue.textProperty(), prevY, new NumberStringConverter());
 	}
 
+	/**
+	 * Fonction permettant de redessinner le canvas lors du redimensionnement de la fenêtre et donc du canvas.
+	 */
 	private void reDraw() {
-		// Permet de conserver des traits fins
+		// Efface le canva afin d'éviter de superposer les traits.
 		centralCanva.getGraphicsContext2D().clearRect(0, 0, centralCanva.getWidth(), centralCanva.getHeight()); 
 
 		for (Figure trace : dessin.getFigures()) {
@@ -89,21 +100,38 @@ public class GribouilleController implements Initializable {
 		}
 	}
 
-	public void onMousePressed(MouseEvent evt) {
+	/**
+	 * Fonction appelée lors du click du canvas.
+	 * Elle permet de commencer un tracé.
+	 * 
+	 * @param evt Utilisé pour récupérer les coordonnées de la souris.
+	 */
+	public void onMousePressed(@SuppressWarnings("exports") MouseEvent evt) {
 		this.prevX.set(evt.getX());
 		this.prevY.set(evt.getY());
 		index++;
 		dessin.getFigures().add(new Trace(1, "noir", evt.getX(), evt.getY()));
 	}
 
-	public void onMouseDragged(MouseEvent evt) {
+	/**
+	 * Fonction appelée lors d'un click-déplacement de la souris sur le canvas.
+	 * Elle permet de dessiner des liaisons entre les points cliqués.
+	 * 
+	 * @param evt Utilisé pour récupérer les coordonnées de la souris.
+	 */
+	public void onMouseDragged(@SuppressWarnings("exports") MouseEvent evt) {
 		centralCanva.getGraphicsContext2D().strokeLine(prevX.get(), prevY.get(), evt.getX(), evt.getY());
 		this.prevX.set(evt.getX());
 		this.prevY.set(evt.getY());
 		dessin.getFigures().get(index).addPoint(evt.getX(), evt.getY());
 	}
 
-	public void onMouseMoved(MouseEvent evt) {
+	/**
+	 * Fonction permettant d'afficher les coordonnées de la souris dans les Labels situés sous le canvas.
+	 * 
+	 * @param evt Utilisé pour récupérer les coordonnées de la souris.
+	 */
+	public void onMouseMoved(@SuppressWarnings("exports") MouseEvent evt) {
 		// On teste la longueur des coordonnées pour éviter les problèmes d'affichage
 		this.XlabelValue.textProperty()
 				.set(Double.toString(evt.getX()).length() > 5 ? 
@@ -115,6 +143,9 @@ public class GribouilleController implements Initializable {
 				: Double.toString(evt.getY()));
 	}
 
+	/**
+	 * Constructeur vide de GribouilleController.
+	 */
 	public GribouilleController() {
 		this.dessin = new Dessin();
 		GribouilleController.index = -1;
@@ -122,7 +153,12 @@ public class GribouilleController implements Initializable {
 		prevY.set(0);
 	}
 
-	public GribouilleController(Dessin dessin) {
+	/**
+	 * Constructeur de GribouilleController.
+	 * 
+	 * @param dessin Dessin permettant d'initialiser le dessin de la classe.
+	 */
+	public GribouilleController(@SuppressWarnings("exports") Dessin dessin) {
 		this.dessin = dessin;
 		GribouilleController.index = -1;
 		prevX.set(0);
