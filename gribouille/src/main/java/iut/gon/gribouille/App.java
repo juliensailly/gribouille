@@ -26,9 +26,10 @@ public class App extends Application {
 		stage.getIcons().add(new Image("file:src\\main\\resources\\iut\\gon\\gribouille\\icon.jpg"));
 		stage.show();
 		Dialogues.prepareFermeture(stage);
-		
+
 		Dessin dessin = new Dessin();
 		GribouilleController gc = new GribouilleController(dessin);
+		
 	}
 
 	static void setRoot(String fxml) throws IOException {
