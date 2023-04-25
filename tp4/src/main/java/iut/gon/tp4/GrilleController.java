@@ -1,23 +1,23 @@
 package iut.gon.tp4;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.Optional;
+import java.util.ResourceBundle;
+
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
-import javafx.scene.Parent;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.text.Font;
-
-import java.io.IOException;
-import java.net.URL;
-import java.util.Optional;
-import java.util.ResourceBundle;
 
 public class GrilleController implements Initializable {
 
@@ -49,7 +49,9 @@ public class GrilleController implements Initializable {
 				grille.add(label, c, l);
 				int lg = l;
 				int col = c;
-				label.setOnMouseClicked(event -> this.joueCase(lg, col));
+				label.setOnMouseClicked(event -> {
+					this.joueCase(lg, col);
+				});
 				label.setMaxSize(1000, 1000);
 				label.setAlignment(Pos.CENTER);
 				label.setFont(Font.font(24));
@@ -76,8 +78,38 @@ public class GrilleController implements Initializable {
 
 	private void onGagne(String joueur) {
 		// TODO demander le nom du joueur
+		if (joueur == null) {
+			System.out.println("Partie nulle");
+			table.ajouteNulle();
+			Alert end = new Alert(AlertType.INFORMATION);
+			end.setTitle("Partie nulle");
+			end.setHeaderText("Résultat");
+			end.setContentText("La partie jouée est nulle...");
+			end.showAndWait();
+			try {
+				onMenuTable(null);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			return;
+		}
+		TextInputDialog tid = new TextInputDialog("Nom");
+		tid.setTitle("Victoire!");
+		tid.setHeaderText("Enregistrement du score");
+		tid.setContentText("Veuillez entrer le nom du joueur gagnant :");
+		String playerName = tid.showAndWait().get();
+		
 		// TODO modifier scores
+		if (playerName != null && !playerName.isBlank()) {
+			table.ajouteVictoire(playerName);
+		}
+		
 		// TODO appeler la table des scores
+		try {
+			onMenuTable(null);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@FXML
@@ -89,7 +121,6 @@ public class GrilleController implements Initializable {
 	public void onMenuTable(ActionEvent evt) throws IOException {
 		// TODO appeler la table des scores
 		FXMLLoader fxmlLoader = new FXMLLoader(Morpion.class.getResource("table.fxml"));
-		
 		grille.getScene().setRoot(fxmlLoader.load());
 		TableController tctrl = fxmlLoader.getController();
 		tctrl.setScores(table);
