@@ -13,25 +13,32 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class TableController {
-  public Label nbNulles;
-  private Scores scores;
+	public Label nbNulles;
+	private Scores scores;
 
-  @FXML public TableView<Scores.Entree> table;
+	@FXML
+	public TableView<Scores.Entree> table;
 
+	public void onFermer(ActionEvent event) {
+		// TODO appeler la grille
+		FXMLLoader fxmlLoader = new FXMLLoader(Morpion.class.getResource("grille.fxml"));
+		fxmlLoader.setController(new GrilleController(scores));
+		try {
+			nbNulles.getScene().setRoot(fxmlLoader.load());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
-  public void onFermer(ActionEvent event) {
-    //TODO appeler la grille
-  }
+	public void onReinit(ActionEvent event) {
+		scores.reinitialiser();
+	}
 
-  public void onReinit(ActionEvent event) {
-    scores.reinitialiser();
-  }
-
-  public void setScores(Scores scores) {
-    this.scores = scores;
-    table.setItems(scores.getScores());
-    table.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("joueur"));
-    table.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("victoires"));
-    nbNulles.textProperty().set(String.valueOf(scores.getNulles()));
-  }
+	public void setScores(Scores scores) {
+		this.scores = scores;
+		table.setItems(scores.getScores());
+		table.getColumns().get(0).setCellValueFactory(new PropertyValueFactory<>("joueur"));
+		table.getColumns().get(1).setCellValueFactory(new PropertyValueFactory<>("victoires"));
+		nbNulles.textProperty().set(String.valueOf(scores.getNulles()));
+	}
 }
