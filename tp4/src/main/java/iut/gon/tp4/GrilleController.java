@@ -38,6 +38,8 @@ public class GrilleController implements Initializable {
 	private @FXML Label joueur;
 
 	private Label[][] contenu = new Label[3][3];
+	
+	private @FXML MenusController menusController;
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -57,6 +59,7 @@ public class GrilleController implements Initializable {
 				label.setFont(Font.font(24));
 			}
 		joueur.textProperty().bind(modele.texteJoueur);
+		menusController.setParams(modele, table);
 	}
 
 	public void joueCase(int lg, int col) {
@@ -87,7 +90,7 @@ public class GrilleController implements Initializable {
 			end.setContentText("La partie jouée est nulle...");
 			end.showAndWait();
 			try {
-				onMenuTable(null);
+				menusController.onMenuTable(null);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
@@ -106,28 +109,9 @@ public class GrilleController implements Initializable {
 		
 		// TODO appeler la table des scores
 		try {
-			onMenuTable(null);
+			menusController.onMenuTable(null);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-	}
-
-	@FXML
-	public void onMenuNouvelle(ActionEvent evt) {
-		modele.nouvellePartie();
-	}
-
-	@FXML
-	public void onMenuTable(ActionEvent evt) throws IOException {
-		// TODO appeler la table des scores
-		FXMLLoader fxmlLoader = new FXMLLoader(Morpion.class.getResource("table.fxml"));
-		grille.getScene().setRoot(fxmlLoader.load());
-		TableController tctrl = fxmlLoader.getController();
-		tctrl.setScores(table);
-	}
-
-	@FXML
-	public void onMenuQuitter(ActionEvent evt) {
-		Platform.exit();
 	}
 }
