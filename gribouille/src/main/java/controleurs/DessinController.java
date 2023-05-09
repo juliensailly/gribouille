@@ -19,7 +19,7 @@ public class DessinController {
 
 	@FXML
 	public void onMousePressed(MouseEvent e) {
-		controleur.onMousePressed(e);
+		controleur.outilCrayon.onMousePress(e);
 	}
 
 	@FXML
@@ -29,7 +29,7 @@ public class DessinController {
 
 	@FXML
 	public void onMouseDragged(MouseEvent e) {
-		controleur.onMouseDragged(e);
+		controleur.outilCrayon.onMouseDrag(e);
 	}
 
 	public void efface() {

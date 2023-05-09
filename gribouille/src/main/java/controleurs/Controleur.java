@@ -6,7 +6,6 @@ import java.util.ResourceBundle;
 import iut.gon.gribouille.Dialogues;
 import iut.gon.modele.Dessin;
 import iut.gon.modele.Figure;
-import iut.gon.modele.Trace;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
@@ -18,6 +17,7 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
+import outils.OutilCrayon;
 
 public class Controleur implements Initializable {
 
@@ -29,15 +29,17 @@ public class Controleur implements Initializable {
 	public SimpleObjectProperty<Color> couleur;
 	public SimpleIntegerProperty epaisseur;
 
-	private @FXML CouleursController couleursController;
-	private @FXML DessinController dessinController;
-	private @FXML MenusController menusController;
-	private @FXML StatutController statutController;
+	public @FXML CouleursController couleursController;
+	public @FXML DessinController dessinController;
+	public @FXML MenusController menusController;
+	public @FXML StatutController statutController;
 
 	public int index;
 
 	public Stage stage;
-	private Dessin dessin;
+	public final Dessin dessin;
+	
+	public OutilCrayon outilCrayon;
 
 	public Controleur(Stage stage, Dessin dessin) {
 		this.dessin = dessin;
@@ -47,6 +49,7 @@ public class Controleur implements Initializable {
 		couleur = new SimpleObjectProperty<Color>(Color.BLACK);
 		epaisseur = new SimpleIntegerProperty(1);
 		this.stage = stage;
+		this.outilCrayon = new OutilCrayon(this);
 	}
 
 	public void initialize(URL url, ResourceBundle ressourceBundle) {
@@ -97,32 +100,6 @@ public class Controleur implements Initializable {
 				prevY.set(trace.getPoints().get(i).getY());
 			}
 		}
-	}
-
-	/**
-	 * Fonction appelée lors du click du canvas. Elle permet de commencer un tracé.
-	 * 
-	 * @param evt Utilisé pour récupérer les coordonnées de la souris.
-	 */
-	public void onMousePressed(MouseEvent evt) {
-		prevX.set(evt.getX());
-		prevY.set(evt.getY());
-		index++;
-		dessin.getFigures().add(new Trace(1, "noir", evt.getX(), evt.getY()));
-	}
-
-	/**
-	 * Fonction appelée lors d'un click-déplacement de la souris sur le canvas. Elle
-	 * permet de dessiner des liaisons entre les points cliqués.
-	 * 
-	 * @param evt Utilisé pour récupérer les coordonnées de la souris.
-	 */
-	public void onMouseDragged(MouseEvent evt) {
-		dessinController.centralCanva.getGraphicsContext2D().strokeLine(prevX.get(), prevY.get(), evt.getX(),
-				evt.getY());
-		prevX.set(evt.getX());
-		prevY.set(evt.getY());
-		dessin.getFigures().get(index).addPoint(evt.getX(), evt.getY());
 	}
 
 	/**
