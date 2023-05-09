@@ -14,7 +14,7 @@ public class StatutController {
 	public Label thicknessLabelValue;
 	@FXML
 	public Label toolLabel;
-	@FXML
+	
 	Controleur controleur;
 
 	public void setControleur(Controleur c) {

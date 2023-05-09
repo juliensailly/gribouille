@@ -8,7 +8,7 @@ public class MenusController {
 	public ToggleGroup epaisseur_group;
 	@FXML
 	public ToggleGroup outil_group;
-	@FXML
+	
 	Controleur controleur;
 
 	public void setControleur(Controleur c) {

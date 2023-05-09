@@ -23,7 +23,7 @@ public class CouleursController {
 	public Rectangle yellow;
 	@FXML
 	public ColorPicker sideColorPicker;
-	@FXML
+
 	Controleur controleur;
 
 	public void setControleur(Controleur c) {
