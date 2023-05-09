@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 
 /**
@@ -29,7 +30,7 @@ public class App extends Application {
         Dessin dessin = new Dessin();
         dessin.setNomDuFichier("nomFichier.txt");
 
-        Controleur controlleur = new Controleur(dessin);
+        Controleur controlleur = new Controleur(stage, dessin);
 
         fxmlLoader.setController(controlleur);
 
@@ -40,12 +41,6 @@ public class App extends Application {
         stage.setScene(scene);
         stage.getIcons().add(new Image("file:src\\main\\resources\\iut\\gon\\gribouille\\icon.png"));
         stage.show();
-
-        stage.setOnCloseRequest(windowEvent -> {
-            if (!Dialogues.confirmation()) {
-                windowEvent.consume();
-            }
-        });
     }
 
     static void setRoot(String fxml) throws IOException {

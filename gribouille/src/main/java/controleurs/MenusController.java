@@ -2,6 +2,7 @@ package controleurs;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.input.MouseEvent;
 
 public class MenusController {
 	@FXML
@@ -13,5 +14,10 @@ public class MenusController {
 
 	public void setControleur(Controleur c) {
 		this.controleur = c;
+	}
+	
+	@FXML
+	public void onQuitte() {
+		controleur.onQuitter();
 	}
 }

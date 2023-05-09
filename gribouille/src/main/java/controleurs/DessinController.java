@@ -18,14 +18,17 @@ public class DessinController {
 		this.controleur = c;
 	}
 	
+	@FXML
 	public void onMousePressed(MouseEvent e) {
 		controleur.onMousePressed(e);
 	}
 	
+	@FXML
 	public void onMouseMoved(MouseEvent e) {
 		controleur.onMouseMoved(e);
 	}
 	
+	@FXML
 	public void onMouseDragged(MouseEvent e) {
 		controleur.onMouseDragged(e);
 	}
