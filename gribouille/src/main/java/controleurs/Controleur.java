@@ -3,7 +3,6 @@ package controleurs;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import iut.gon.gribouille.GribouilleController;
 import iut.gon.modele.Dessin;
 import iut.gon.modele.Figure;
 import javafx.beans.binding.Bindings;

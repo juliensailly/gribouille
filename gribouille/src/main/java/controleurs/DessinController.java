@@ -47,7 +47,7 @@ public class DessinController {
 	 * 
 	 * @param evt Utilisé pour récupérer les coordonnées de la souris.
 	 */
-	public void onMousePressed(@SuppressWarnings("exports") MouseEvent evt) {
+	public void onMousePressed(MouseEvent evt) {
 		controleur.prevX.set(evt.getX());
 		controleur.prevY.set(evt.getY());
 		index++;
@@ -60,7 +60,7 @@ public class DessinController {
 	 * 
 	 * @param evt Utilisé pour récupérer les coordonnées de la souris.
 	 */
-	public void onMouseDragged(@SuppressWarnings("exports") MouseEvent evt) {
+	public void onMouseDragged(MouseEvent evt) {
 		centralCanva.getGraphicsContext2D().strokeLine(controleur.prevX.get(), controleur.prevY.get(), evt.getX(), evt.getY());
 		controleur.prevX.set(evt.getX());
 		controleur.prevY.set(evt.getY());
@@ -72,7 +72,7 @@ public class DessinController {
 	 * 
 	 * @param evt Utilisé pour récupérer les coordonnées de la souris.
 	 */
-	public void onMouseMoved(@SuppressWarnings("exports") MouseEvent evt) {
+	public void onMouseMoved(MouseEvent evt) {
 		// On teste la longueur des coordonnées pour éviter les problèmes d'affichage
 		controleur.statutController.XlabelValue.textProperty()
 				.set(Double.toString(evt.getX()).length() > 5 ? 
