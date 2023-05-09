@@ -17,7 +17,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import javafx.util.converter.NumberStringConverter;
 
 public class Controleur implements Initializable {
@@ -70,8 +69,8 @@ public class Controleur implements Initializable {
 
 		stage.setOnCloseRequest(windowEvent -> {
 			if (!Dialogues.confirmation()) {
+				windowEvent.consume();
 			}
-			windowEvent.consume();
 		});
 	}
 
