@@ -17,7 +17,6 @@ import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 import javafx.util.converter.NumberStringConverter;
 
 public class Controleur implements Initializable {
