@@ -54,7 +54,16 @@ public class App extends Application {
     public static void main(String[] args) {
         launch();
     }
-
 }
+
+/*
+ * To-Do List :
+ * 
+ * Sélectionner le bon outil dès le départ
+ * Régler problème de sélection d'outil
+ * Faire l'outil étoile
+ *
+*/
+
 
 

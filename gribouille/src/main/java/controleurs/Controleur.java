@@ -11,6 +11,7 @@ import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleDoubleProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
@@ -18,6 +19,8 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 import outils.OutilCrayon;
+import outils.OutilEtoile;
+import outils.Outils;
 
 public class Controleur implements Initializable {
 
@@ -28,6 +31,7 @@ public class Controleur implements Initializable {
 
 	public SimpleObjectProperty<Color> couleur;
 	public SimpleIntegerProperty epaisseur;
+	public SimpleStringProperty outilLabel;
 
 	public @FXML CouleursController couleursController;
 	public @FXML DessinController dessinController;
@@ -39,7 +43,7 @@ public class Controleur implements Initializable {
 	public Stage stage;
 	public final Dessin dessin;
 	
-	public OutilCrayon outilCrayon;
+	public Outils outilCrayon;
 
 	public Controleur(Stage stage, Dessin dessin) {
 		this.dessin = dessin;
@@ -78,6 +82,8 @@ public class Controleur implements Initializable {
 
 		Bindings.bindBidirectional(statutController.thicknessLabelValue.textProperty(), epaisseur, new NumberStringConverter());
 		statutController.colorLabel.textProperty().bind(couleur.asString());
+		outilLabel = new SimpleStringProperty("Outil : Crayon");
+		statutController.toolLabel.textProperty().bind(outilLabel);
 	}
 
 	/**
@@ -127,5 +133,15 @@ public class Controleur implements Initializable {
 		if (Dialogues.confirmation()) {
 			Platform.exit();
 		}
+	}
+	
+	public void onCrayon() {
+		outilLabel.set("Outil : Crayon");
+		outilCrayon = new OutilCrayon(this);
+	}
+
+	public void onEtoile() {
+		outilLabel.set("Outil : Etoile");
+		outilCrayon = new OutilEtoile(this);
 	}
 }
