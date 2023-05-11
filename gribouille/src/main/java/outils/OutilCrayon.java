@@ -28,7 +28,8 @@ public class OutilCrayon extends Outils{
 		prevX.set(evt.getX());
 		prevY.set(evt.getY());
 		index++;
-		super.controleur.dessin.getFigures().add(new Trace(1, "noir", evt.getX(), evt.getY()));
+		controleur.trace = new Trace(1, "noir", evt.getX(), evt.getY());
+		controleur.dessin.getFigures().add(controleur.trace);
 	}
 
 	/**
@@ -38,10 +39,10 @@ public class OutilCrayon extends Outils{
 	 * @param evt Utilisé pour récupérer les coordonnées de la souris.
 	 */
 	public void onMouseDrag(MouseEvent evt) {
-		super.controleur.dessinController.centralCanva.getGraphicsContext2D().strokeLine(prevX.get(), prevY.get(), evt.getX(),
+		controleur.dessinController.centralCanva.getGraphicsContext2D().strokeLine(prevX.get(), prevY.get(), evt.getX(),
 				evt.getY());
 		prevX.set(evt.getX());
 		prevY.set(evt.getY());
-		super.controleur.dessin.getFigures().get(index).addPoint(evt.getX(), evt.getY());
+		controleur.trace.addPoint(evt.getX(), evt.getY());
 	}
 }
