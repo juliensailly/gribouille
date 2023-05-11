@@ -5,7 +5,9 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.scene.text.Text;
 
 import java.net.URL;
@@ -40,10 +42,17 @@ public class ControleurDemineur implements Initializable {
         textfiledMarque.textProperty().bind(modeleDemineur.nbMarquesProperty().asString());
         textfielInconnu.textProperty().bind(modeleDemineur.nbInconnuesProperty().asString());
 
-        difficulte.selectedToggleProperty().addListener(obs -> initGrille(difficulte.getSelectedToggle().getUserData()));
+        difficulte.selectedToggleProperty().addListener(obs -> initGrille(difficulte.getSelectedToggle().getUserData().toString()));
     }
 
-    private void initGrille(Object userData) {
-        
+    private void initGrille(String userData) {
+        gridpane.getColumnConstraints().clear();
+        gridpane.getRowConstraints().clear();
+
+        int [] parsedUserData = ModeleDemineur.parseUserData(userData);
+        modeleDemineur = new ModeleDemineur(parsedUserData[0], parsedUserData[1], parsedUserData[2]);
+
+        gridpane.getColumnConstraints().add(new ColumnConstraints(32));
+        gridpane.getRowConstraints().add(new RowConstraints(32));
     }
 }
