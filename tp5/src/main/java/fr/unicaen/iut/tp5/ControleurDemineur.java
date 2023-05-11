@@ -78,9 +78,10 @@ public class ControleurDemineur implements Initializable {
         modeleDemineur = new ModeleDemineur(parsedUserData[0], parsedUserData[1], parsedUserData[2]);
 
         for (int i = 0; i < parsedUserData[0]; i++) {
-            for (int j = 0; j < parsedUserData[1]; j++) {
-                gridpane.add(new Label(""), i, j);
-            }
+            gridpane.addColumn(i, new Label(""));
+        }
+        for (int j = 0; j < parsedUserData[1]; j++) {
+            gridpane.addRow(j, new Label());
         }
         gridpane.getColumnConstraints().add(new ColumnConstraints(paneWidth));
         gridpane.getRowConstraints().add(new RowConstraints(paneWidth));
@@ -89,8 +90,6 @@ public class ControleurDemineur implements Initializable {
         libre = new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), new Insets(0)));
         echec = new Background(new BackgroundFill(Color.RED, new CornerRadii(0), new Insets(0)));
         marquee = new Background(new BackgroundFill(Color.LEMONCHIFFON, new CornerRadii(0), new Insets(0)));
-
-        System.out.println(gridpane.getColumnCount() + "   " + gridpane.getRowCount());
 
         for (int i = 0; i < parsedUserData[0]; i++) {
             for (int j = 0; j < parsedUserData[1]; j++) {

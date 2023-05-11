@@ -18,7 +18,7 @@ public class MainDemineur extends Application{
 		FXMLLoader loader = new FXMLLoader(MainDemineur.class.getResource("cadreDemineur.fxml"));
 		ControleurDemineur controleurDemineur = new ControleurDemineur();
 		loader.setController(controleurDemineur);
-		Scene scene = new Scene(loader.load());
+		Scene scene = new Scene(loader.load(), 650, 700);
 		stage.getIcons().add(new Image("file:src/main/resources/fr/unicaen/iut/tp5/icon.png"));
 		stage.setTitle("Démineur");
 		stage.setResizable(false);
