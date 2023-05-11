@@ -17,7 +17,7 @@ public class ModeleDemineur {
   public final SimpleBooleanProperty autoZero = new SimpleBooleanProperty(false);
   private final ReadOnlyIntegerWrapper nbInconnues = new ReadOnlyIntegerWrapper();
   private final ReadOnlyIntegerWrapper nbMarques = new ReadOnlyIntegerWrapper();
-  private final ReadOnlyBooleanWrapper perdu = new ReadOnlyBooleanWrapper();
+  public final ReadOnlyBooleanWrapper perdu = new ReadOnlyBooleanWrapper();
   private ReadOnlyBooleanWrapper[][] revelees;
   private ReadOnlyBooleanWrapper[][] marquees;
   private int[][] textes;

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Control;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class MainDemineur extends Application{
@@ -18,7 +19,15 @@ public class MainDemineur extends Application{
 		ControleurDemineur controleurDemineur = new ControleurDemineur();
 		loader.setController(controleurDemineur);
 		Scene scene = new Scene(loader.load());
+		stage.getIcons().add(new Image("file:src/main/resources/fr/unicaen/iut/tp5/icon.png"));
+		stage.setTitle("Démineur");
+		stage.setResizable(false);
 		stage.setScene(scene);
 		stage.show();
+
+		// Pour redimensionner la fenêtre en fonction de la difficulté
+		controleurDemineur.setStage(stage);
 	}
+
+
 }
