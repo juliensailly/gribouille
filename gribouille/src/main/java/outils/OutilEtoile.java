@@ -27,7 +27,6 @@ public class OutilEtoile extends Outils {
 	public void onMouseDrag(MouseEvent e) {
 		controleur.dessinController.centralCanva.getGraphicsContext2D().strokeLine(controleur.etoile.getCentre().getX(), controleur.etoile.getCentre().getY(), e.getX(), e.getY());
 		controleur.etoile.addPoint(e.getX(), e.getY());
-
 	}
 
 }

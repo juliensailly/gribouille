@@ -114,7 +114,6 @@ public class Controleur implements Initializable {
                     double cY = ((Etoile) trace).getCentre().getY();
                     dessinController.centralCanva.getGraphicsContext2D().strokeLine(trace.getPoints().get(i).getX(), trace.getPoints().get(i).getY(),
                             cX, cY);
-                    System.out.println("tg");
                 }
             }
 
