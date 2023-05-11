@@ -3,6 +3,7 @@ package iut.gon.gribouille;
 
 import java.io.IOException;
 
+import controleurs.Controleur;
 import iut.gon.modele.Dessin;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -19,54 +20,50 @@ import javafx.stage.Stage;
 public class App extends Application {
 
 	private static Scene scene;
-
-	/**
-	 * Coordonne le démarrage de l'application JavaFX.
-	 * 
-	 */
+	
 	@Override
-	public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
-		scene = new Scene(loadFXML("CadreGribouille"), 640, 480);
-		stage.setScene(scene);
-		stage.getIcons().add(new Image("file:src\\main\\resources\\iut\\gon\\gribouille\\icon.png"));
-		stage.show();
-		Dialogues.prepareFermeture(stage);
+    public void start(@SuppressWarnings("exports") Stage stage) throws IOException {
+        //scene = new Scene(loadFXML("CadreGribouille"), 800, 600);
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("CadreGribouille.fxml"));
 
-		Dessin dessin = new Dessin();
-		@SuppressWarnings("unused")
-		GribouilleController gc = new GribouilleController(dessin);
-		stage.titleProperty().bind(dessin.nomDuFichierProperty());
-	}
+        Dessin dessin = new Dessin();
+        dessin.setNomDuFichier("nomFichier.txt");
 
-	/**
-	 * Définit la racine du graph de la scène.
-	 * 
-	 * @param fxml Le chemin du fichier .fxml concerncé.
-	 * @throws IOException
-	 */
-	static void setRoot(String fxml) throws IOException {
-		scene.setRoot(loadFXML(fxml));
-	}
+        Controleur controlleur = new Controleur(stage, dessin);
 
-	/**
-	 * Permet de charger le contenu d'un fichier .fxml
-	 * 
-	 * @param fxml Le chemin du fichier sans l'extension .fxml.
-	 * @return Une hiérarchie de scène FXML correspondant au fichier.
-	 * @throws IOException
-	 */
-	private static Parent loadFXML(String fxml) throws IOException {
-		FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
-		return fxmlLoader.load();
-	}
+        fxmlLoader.setController(controlleur);
 
-	/**
-	 * La fonction main.
-	 * 
-	 * @param args Pas utilisé ici.
-	 */
-	public static void main(String[] args) {
-		launch();
-	}
+        scene = new Scene(fxmlLoader.load());
 
+        stage.titleProperty().bind(dessin.nomDuFichierProperty());
+
+        stage.setScene(scene);
+        stage.getIcons().add(new Image("file:src\\main\\resources\\iut\\gon\\gribouille\\icon.png"));
+        stage.show();
+    }
+
+    static void setRoot(String fxml) throws IOException {
+        scene.setRoot(loadFXML(fxml));
+    }
+
+    private static Parent loadFXML(String fxml) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource(fxml + ".fxml"));
+        return fxmlLoader.load();
+    }
+
+    public static void main(String[] args) {
+        launch();
+    }
 }
+
+/*
+ * To-Do List :
+ * 
+ * Sélectionner le bon outil dès le départ
+ * Régler problème de sélection d'outil
+ * Faire l'outil étoile
+ *
+*/
+
+
+

@@ -6,5 +6,6 @@ module iut.gon.gribouille_tp1 {
 	requires javafx.base;
 
     opens iut.gon.gribouille to javafx.fxml;
+    opens controleurs;
     exports iut.gon.gribouille;
 }
