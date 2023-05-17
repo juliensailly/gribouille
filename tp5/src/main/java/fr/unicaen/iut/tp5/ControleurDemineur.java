@@ -51,11 +51,6 @@ public class ControleurDemineur implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        modeleDemineur = new ModeleDemineur(10, 10, 10);
-
-        textfiledMarque.textProperty().bind(modeleDemineur.nbMarquesProperty().asString());
-        textfielInconnu.textProperty().bind(modeleDemineur.nbInconnuesProperty().asString());
-
         //Initialisation d'une partie de difficulté moyenne au lancement
         initGrille(difficulte.getSelectedToggle().getUserData().toString());
 
@@ -84,6 +79,9 @@ public class ControleurDemineur implements Initializable {
 
         int[] parsedUserData = ModeleDemineur.parseUserData(userData);
         modeleDemineur = new ModeleDemineur(parsedUserData[0], parsedUserData[1], parsedUserData[2]);
+        
+        textfiledMarque.textProperty().bind(modeleDemineur.nbMarquesProperty().asString());
+        textfielInconnu.textProperty().bind(modeleDemineur.nbInconnuesProperty().asString());
 
                 inconnu = new Background(new BackgroundFill(Color.AQUA, new CornerRadii(20), new Insets(0)));
         libre = new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), new Insets(0)));
