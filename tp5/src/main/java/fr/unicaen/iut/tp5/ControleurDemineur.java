@@ -1,15 +1,13 @@
 package fr.unicaen.iut.tp5;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Label;
-import javafx.scene.control.RadioMenuItem;
-import javafx.scene.control.TextField;
-import javafx.scene.control.ToggleGroup;
+import javafx.scene.control.*;
 import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.*;
@@ -17,7 +15,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -36,6 +33,9 @@ public class ControleurDemineur implements Initializable {
     private RadioMenuItem diffDifficile;
 
     @FXML
+    private MenuItem quitter;
+
+    @FXML
     private TextField textfiledMarque;
 
     @FXML
@@ -49,6 +49,7 @@ public class ControleurDemineur implements Initializable {
     Background echec;
     Background marquee;
     Stage stage;
+    boolean gameLost;
 
     public final int paneWidth = 32;
 
@@ -68,6 +69,7 @@ public class ControleurDemineur implements Initializable {
     private void initGrille(String userData) {
         gridpane.getColumnConstraints().clear();
         gridpane.getRowConstraints().clear();
+        gameLost = false;
 
         boolean bool = false;
         while (!bool) {
@@ -113,21 +115,39 @@ public class ControleurDemineur implements Initializable {
                     } else if (modeleDemineur.estRevelee(finalI, finalJ) && Objects.equals(modeleDemineur.getText(finalI, finalJ), "X")) {
                         label.setBackground(echec);
                         modeleDemineur.perdu.set(false); //To allow the player to continue playing
+                        gameLost = true; //To register the loss
                     } else if (modeleDemineur.estRevelee(finalI, finalJ) && Objects.equals(modeleDemineur.getText(finalI, finalJ), "0")) {
                         label.setBackground(libre);
                         for (int k = 0; k < gridpane.getChildren().size(); k++) {
                             ObservableList<Node> tab = gridpane.getChildren();
                             if (tab.get(k).getClass().equals(Label.class)) {
                                 Label lab = (Label) tab.get(k);
-                                if (!lab.getText().equals("?") && !lab.getText().equals("X")) {
+                                if (!lab.getText().equals("?") && !lab.getText().equals("X") && !lab.getText().equals("P")) {
                                     lab.setBackground(libre);
                                 }
                             }
                         }
                     } else if (modeleDemineur.estRevelee(finalI, finalJ) && event.getButton().equals(MouseButton.PRIMARY)) {
                         label.setBackground(libre);
-                    } else if (modeleDemineur.estRevelee(finalI, finalJ) && event.getButton().equals(MouseButton.SECONDARY)) {
+                    } else if (modeleDemineur.estRevelee(finalI, finalJ) && event.getButton().equals(MouseButton.SECONDARY) && Objects.equals(modeleDemineur.getText(finalI, finalJ), "?")) {
                         label.setBackground(marquee);
+                    }
+
+                    // Check if the game has been won or lost
+                    if (gameLost && modeleDemineur.getNbInconnues() == 0) {
+                        Dialog<Object> winDialog = new Dialog<>();
+                        winDialog.setTitle("You lost...");
+                        winDialog.setContentText("At least one mine exploded... You'll do better next time!");
+                        winDialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+                        winDialog.showAndWait();
+                        initGrille(difficulte.getSelectedToggle().getUserData().toString());
+                    } else if (!gameLost && modeleDemineur.getNbInconnues() == modeleDemineur.getNbMines()) {
+                        Dialog<Object> winDialog = new Dialog<>();
+                        winDialog.setTitle("You won!");
+                        winDialog.setContentText("Congratulations, you won!");
+                        winDialog.getDialogPane().getButtonTypes().add(ButtonType.OK);
+                        winDialog.showAndWait();
+                        initGrille(difficulte.getSelectedToggle().getUserData().toString());
                     }
                 });
                 gridpane.add(label, i, j);
@@ -142,13 +162,15 @@ public class ControleurDemineur implements Initializable {
     public void resizer(String userData, int width) {
         int[] parsedUserData = ModeleDemineur.parseUserData(userData);
 
-        if (width * parsedUserData[0] + 20 < 400) {
-            stage.setWidth(400);
-            gridpane.setAlignment(Pos.TOP_LEFT);
+        if (width * parsedUserData[0] + 20 < 660) {
+            stage.setWidth(660);
         } else {
             stage.setWidth(width * parsedUserData[0] + 20);
-            gridpane.setAlignment(Pos.TOP_CENTER);
         }
         stage.setHeight(width * parsedUserData[1] + 100);
+    }
+
+    public void onQuitterClick() {
+        Platform.exit();
     }
 }

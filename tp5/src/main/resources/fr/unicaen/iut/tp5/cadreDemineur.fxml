@@ -14,49 +14,56 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1">
-   <top>
-      <VBox prefHeight="62.0" prefWidth="600.0" BorderPane.alignment="CENTER">
-         <children>
-            <MenuBar>
-              <menus>
-                <Menu mnemonicParsing="false" text="Jeu">
-                  <items>
-                    <MenuItem mnemonicParsing="false" text="Quitter" />
-                  </items>
-                </Menu>
-                <Menu mnemonicParsing="false" text="Difficulté">
-                  <items>
-                        <RadioMenuItem fx:id="diffFacile" mnemonicParsing="false" text="Facile" userData="10;10;10">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="difficulte" />
-                           </toggleGroup>
-                        </RadioMenuItem>
-                        <RadioMenuItem fx:id="diffMoyen" mnemonicParsing="false" selected="true" text="Moyen" toggleGroup="$difficulte" userData="20;20;50" />
-                        <RadioMenuItem fx:id="diffDifficile" mnemonicParsing="false" text="Difficile" toggleGroup="$difficulte" userData="30;20;100" />
-                  </items>
-                </Menu>
-              </menus>
-            </MenuBar>
-            <HBox alignment="CENTER_LEFT" prefHeight="34.0">
-               <children>
-                  <Label prefHeight="17.0" prefWidth="130.0" text="   Nombre de marques : " />
-                  <TextField fx:id="textfiledMarque" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="40.0" />
-                  <Label prefHeight="17.0" prefWidth="132.0" text="   Nombre d'inconnues : " />
-                  <TextField fx:id="textfielInconnu" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="40.0" />
-               </children>
-            </HBox>
-         </children>
-      </VBox>
-   </top>
-   <center>
-      <GridPane fx:id="gridpane" alignment="TOP_CENTER" gridLinesVisible="true" BorderPane.alignment="CENTER">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-      </GridPane>
-   </center>
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0"
+            prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.1" xmlns:fx="http://javafx.com/fxml/1">
+    <top>
+        <VBox prefHeight="62.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+            <children>
+                <MenuBar>
+                    <menus>
+                        <Menu mnemonicParsing="false" text="Jeu">
+                            <items>
+                                <MenuItem fx:id="quitter" mnemonicParsing="false" onAction="#onQuitterClick"
+                                          text="Quitter"/>
+                            </items>
+                        </Menu>
+                        <Menu mnemonicParsing="false" text="Difficulté">
+                            <items>
+                                <RadioMenuItem fx:id="diffFacile" mnemonicParsing="false" text="Facile"
+                                               userData="10;10;10">
+                                    <toggleGroup>
+                                        <ToggleGroup fx:id="difficulte"/>
+                                    </toggleGroup>
+                                </RadioMenuItem>
+                                <RadioMenuItem fx:id="diffMoyen" mnemonicParsing="false" selected="true" text="Moyen"
+                                               toggleGroup="$difficulte" userData="20;20;50"/>
+                                <RadioMenuItem fx:id="diffDifficile" mnemonicParsing="false" text="Difficile"
+                                               toggleGroup="$difficulte" userData="30;20;100"/>
+                            </items>
+                        </Menu>
+                    </menus>
+                </MenuBar>
+                <HBox alignment="CENTER_LEFT" prefHeight="34.0">
+                    <children>
+                        <Label prefHeight="17.0" prefWidth="130.0" text="   Nombre de marques : "/>
+                        <TextField fx:id="textfiledMarque" editable="false" focusTraversable="false" prefHeight="25.0"
+                                   prefWidth="40.0"/>
+                        <Label prefHeight="17.0" prefWidth="132.0" text="   Nombre d'inconnues : "/>
+                        <TextField fx:id="textfielInconnu" editable="false" focusTraversable="false" prefHeight="25.0"
+                                   prefWidth="40.0"/>
+                    </children>
+                </HBox>
+            </children>
+        </VBox>
+    </top>
+    <center>
+        <GridPane fx:id="gridpane" alignment="TOP_CENTER" gridLinesVisible="true" BorderPane.alignment="CENTER">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            </rowConstraints>
+        </GridPane>
+    </center>
 </BorderPane>
