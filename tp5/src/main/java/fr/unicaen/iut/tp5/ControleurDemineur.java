@@ -1,9 +1,11 @@
 package fr.unicaen.iut.tp5;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioMenuItem;
 import javafx.scene.control.TextField;
@@ -15,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -79,11 +82,11 @@ public class ControleurDemineur implements Initializable {
 
         int[] parsedUserData = ModeleDemineur.parseUserData(userData);
         modeleDemineur = new ModeleDemineur(parsedUserData[0], parsedUserData[1], parsedUserData[2]);
-        
+
         textfiledMarque.textProperty().bind(modeleDemineur.nbMarquesProperty().asString());
         textfielInconnu.textProperty().bind(modeleDemineur.nbInconnuesProperty().asString());
 
-                inconnu = new Background(new BackgroundFill(Color.AQUA, new CornerRadii(20), new Insets(0)));
+        inconnu = new Background(new BackgroundFill(Color.AQUA, new CornerRadii(20), new Insets(0)));
         libre = new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), new Insets(0)));
         echec = new Background(new BackgroundFill(Color.RED, new CornerRadii(0), new Insets(0)));
         marquee = new Background(new BackgroundFill(Color.LEMONCHIFFON, new CornerRadii(0), new Insets(0)));
@@ -109,7 +112,18 @@ public class ControleurDemineur implements Initializable {
                         label.setBackground(marquee);
                     } else if (modeleDemineur.estRevelee(finalI, finalJ) && Objects.equals(modeleDemineur.getText(finalI, finalJ), "X")) {
                         label.setBackground(echec);
-                        modeleDemineur.perdu.set(false);
+                        modeleDemineur.perdu.set(false); //To allow the player to continue playing
+                    } else if (modeleDemineur.estRevelee(finalI, finalJ) && Objects.equals(modeleDemineur.getText(finalI, finalJ), "0")) {
+                        label.setBackground(libre);
+                        for (int k = 0; k < gridpane.getChildren().size(); k++) {
+                            ObservableList<Node> tab = gridpane.getChildren();
+                            if (tab.get(k).getClass().equals(Label.class)) {
+                                Label lab = (Label) tab.get(k);
+                                if (!lab.getText().equals("?") && !lab.getText().equals("X")) {
+                                    lab.setBackground(libre);
+                                }
+                            }
+                        }
                     } else if (modeleDemineur.estRevelee(finalI, finalJ) && event.getButton().equals(MouseButton.PRIMARY)) {
                         label.setBackground(libre);
                     } else if (modeleDemineur.estRevelee(finalI, finalJ) && event.getButton().equals(MouseButton.SECONDARY)) {
@@ -128,15 +142,13 @@ public class ControleurDemineur implements Initializable {
     public void resizer(String userData, int width) {
         int[] parsedUserData = ModeleDemineur.parseUserData(userData);
 
-        if (width*parsedUserData[0] + 20 < 400) {
+        if (width * parsedUserData[0] + 20 < 400) {
             stage.setWidth(400);
             gridpane.setAlignment(Pos.TOP_LEFT);
         } else {
-            stage.setWidth(width*parsedUserData[0] + 20);
+            stage.setWidth(width * parsedUserData[0] + 20);
             gridpane.setAlignment(Pos.TOP_CENTER);
         }
-        stage.setHeight(width*parsedUserData[1] + 100);
-
-
+        stage.setHeight(width * parsedUserData[1] + 100);
     }
 }

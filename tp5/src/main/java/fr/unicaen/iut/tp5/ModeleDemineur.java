@@ -18,7 +18,7 @@ public class ModeleDemineur {
     /**
      * Autorise la révélation automatique des zones sûres
      */
-    public final SimpleBooleanProperty autoZero = new SimpleBooleanProperty(false);
+    public final SimpleBooleanProperty autoZero = new SimpleBooleanProperty(true);
     private final ReadOnlyIntegerWrapper nbInconnues = new ReadOnlyIntegerWrapper();
     private final ReadOnlyIntegerWrapper nbMarques = new ReadOnlyIntegerWrapper();
     public final ReadOnlyBooleanWrapper perdu = new ReadOnlyBooleanWrapper();
