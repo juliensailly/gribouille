@@ -38,7 +38,7 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <HBox alignment="CENTER_LEFT" prefHeight="34.0" prefWidth="600.0">
+            <HBox alignment="CENTER_LEFT" prefHeight="34.0">
                <children>
                   <Label prefHeight="17.0" prefWidth="130.0" text="   Nombre de marques : " />
                   <TextField fx:id="textfiledMarque" editable="false" focusTraversable="false" prefHeight="25.0" prefWidth="40.0" />

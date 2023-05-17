@@ -71,33 +71,21 @@ public class ControleurDemineur implements Initializable {
         gridpane.getColumnConstraints().clear();
         gridpane.getRowConstraints().clear();
 
-        /*while (!gridpane.getChildren().isEmpty()) {
-            gridpane.getChildren().remove(0);
-        }
-
-        int length = gridpane.getChildren().size()/2;
-        System.out.println(length);
-        if (length != 0) {
-            for (int i = 0; i < length; i++) {
-                gridpane.getChildren().remove(gridpane.getChildren().size()-1);
+        boolean bool = false;
+        while (!bool) {
+            if (gridpane.getChildren().isEmpty()) {
+                bool = true;
+            } else if (gridpane.getChildren().size() == 1 && gridpane.getChildren().get(0).getClass().equals(javafx.scene.Group.class)) {
+                bool = true;
+            } else {
+                gridpane.getChildren().remove(gridpane.getChildren().size() - 1);
             }
         }
-        */
-
-        gridpane.getChildren().remove(0, gridpane.getChildren().size()-1);
-
 
         int[] parsedUserData = ModeleDemineur.parseUserData(userData);
         modeleDemineur = new ModeleDemineur(parsedUserData[0], parsedUserData[1], parsedUserData[2]);
 
-        for (int i = 0; i < parsedUserData[0]; i++) {
-            gridpane.addColumn(i, new Label(""));
-        }
-        for (int j = 0; j < parsedUserData[1]; j++) {
-            gridpane.addRow(j, new Label(""));
-        }
-
-        inconnu = new Background(new BackgroundFill(Color.AQUA, new CornerRadii(20), new Insets(0)));
+                inconnu = new Background(new BackgroundFill(Color.AQUA, new CornerRadii(20), new Insets(0)));
         libre = new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), new Insets(0)));
         echec = new Background(new BackgroundFill(Color.RED, new CornerRadii(0), new Insets(0)));
         marquee = new Background(new BackgroundFill(Color.LEMONCHIFFON, new CornerRadii(0), new Insets(0)));
@@ -150,5 +138,7 @@ public class ControleurDemineur implements Initializable {
             gridpane.setAlignment(Pos.TOP_CENTER);
         }
         stage.setHeight(width*parsedUserData[1] + 100);
+
+
     }
 }
