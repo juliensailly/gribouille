@@ -15,7 +15,6 @@ import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.net.URL;
-import java.util.Arrays;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -64,15 +63,29 @@ public class ControleurDemineur implements Initializable {
             initGrille(difficulte.getSelectedToggle().getUserData().toString());
             resizer(difficulte.getSelectedToggle().getUserData().toString(), paneWidth);
         });
+        gridpane.getColumnConstraints().add(new ColumnConstraints(paneWidth));
+        gridpane.getRowConstraints().add(new RowConstraints(paneWidth));
     }
 
     private void initGrille(String userData) {
         gridpane.getColumnConstraints().clear();
         gridpane.getRowConstraints().clear();
 
-        while (!gridpane.getChildren().isEmpty()) {
+        /*while (!gridpane.getChildren().isEmpty()) {
             gridpane.getChildren().remove(0);
         }
+
+        int length = gridpane.getChildren().size()/2;
+        System.out.println(length);
+        if (length != 0) {
+            for (int i = 0; i < length; i++) {
+                gridpane.getChildren().remove(gridpane.getChildren().size()-1);
+            }
+        }
+        */
+
+        gridpane.getChildren().remove(0, gridpane.getChildren().size()-1);
+
 
         int[] parsedUserData = ModeleDemineur.parseUserData(userData);
         modeleDemineur = new ModeleDemineur(parsedUserData[0], parsedUserData[1], parsedUserData[2]);
@@ -81,10 +94,8 @@ public class ControleurDemineur implements Initializable {
             gridpane.addColumn(i, new Label(""));
         }
         for (int j = 0; j < parsedUserData[1]; j++) {
-            gridpane.addRow(j, new Label());
+            gridpane.addRow(j, new Label(""));
         }
-        gridpane.getColumnConstraints().add(new ColumnConstraints(paneWidth));
-        gridpane.getRowConstraints().add(new RowConstraints(paneWidth));
 
         inconnu = new Background(new BackgroundFill(Color.AQUA, new CornerRadii(20), new Insets(0)));
         libre = new Background(new BackgroundFill(Color.LIGHTGRAY, new CornerRadii(0), new Insets(0)));
