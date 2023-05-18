@@ -187,33 +187,41 @@ public class Controleur implements Initializable {
                     break;
                 case "r":
                     setCouleur(new Color(1, 0, 0, 1));
+                    statutController.colorLabel.setText("Couleur : red");
                     break;
                 case "v":
                     setCouleur(new Color(0, 1, 0, 1));
+                    statutController.colorLabel.setText("Couleur : green");
                     break;
                 case "b":
                     setCouleur(new Color(0, 0, 1, 1));
+                    statutController.colorLabel.setText("Couleur : blue");
                     break;
                 case "t":
                     setCouleur(new Color(0, 1, 1, 1));
+                    statutController.colorLabel.setText("Couleur : cyan");
                     break;
                 case "m":
                     setCouleur(new Color(1, 0, 1, 1));
+                    statutController.colorLabel.setText("Couleur : magenta");
                     break;
                 case "j":
                     setCouleur(new Color(1, 1, 0, 1));
+                    statutController.colorLabel.setText("Couleur : yellow");
                     break;
                 case "n":
                     setCouleur(new Color(0, 0, 0, 1));
+                    statutController.colorLabel.setText("Couleur : black");
                     break;
                 case "w":
                     setCouleur(new Color(1, 1, 1, 1));
+                    statutController.colorLabel.setText("Couleur : white");
                     break;
-
                 default:
                     onCrayon();
                     setEpaisseur("1");
-                    setCouleur(new Color(255,255,255,1));
+                    setCouleur(new Color(0,0,0,1));
+                    statutController.colorLabel.setText("Couleur : black");
             }
         }
     }
