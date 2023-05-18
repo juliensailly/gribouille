@@ -85,7 +85,7 @@ public class Controleur implements Initializable {
         });
 
         Bindings.bindBidirectional(statutController.thicknessLabelValue.textProperty(), epaisseur, new NumberStringConverter());
-        statutController.colorLabel.textProperty().bind(couleur.asString());
+        //statutController.colorLabel.textProperty().bind(couleur.asString());
         outilLabel = new SimpleStringProperty("Outil : Crayon");
         statutController.toolLabel.textProperty().bind(outilLabel);
     }
@@ -106,6 +106,7 @@ public class Controleur implements Initializable {
 
             for (int i = 1; i < trace.getPoints().size(); i++) {
                 dessinController.centralCanva.getGraphicsContext2D().setLineWidth(trace.getEpaisseur());
+                dessinController.centralCanva.getGraphicsContext2D().setStroke(Color.valueOf(trace.getCouleur()));
                 if (trace instanceof Trace) {
                     dessinController.centralCanva.getGraphicsContext2D().strokeLine(prevX.get(), prevY.get(),
                             trace.getPoints().get(i).getX(), trace.getPoints().get(i).getY());
@@ -165,5 +166,7 @@ public class Controleur implements Initializable {
 
     public void setCouleur(Paint fill) {
         this.couleur = new SimpleObjectProperty<Color>((Color) fill);
+        dessinController.setCouleur(fill);
+        statutController.setColorLabel(fill);
     }
 }

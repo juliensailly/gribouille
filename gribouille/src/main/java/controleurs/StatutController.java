@@ -2,6 +2,7 @@ package controleurs;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
+import javafx.scene.paint.Paint;
 
 public class StatutController {
 	@FXML
@@ -23,5 +24,9 @@ public class StatutController {
 
 	public void setThicknessLabelValue(String epaisseur) {
 		thicknessLabelValue.setText(epaisseur);
+	}
+
+	public void setColorLabel(Paint p) {
+		colorLabel.setText(p.toString());
 	}
 }

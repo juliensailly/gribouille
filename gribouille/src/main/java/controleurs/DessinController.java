@@ -4,6 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
 
 public class DessinController {
 	@FXML
@@ -42,5 +43,9 @@ public class DessinController {
 
 	public void setEpaisseur(int epaisseur) {
 		centralCanva.getGraphicsContext2D().setLineWidth(epaisseur);
+	}
+
+	public void setCouleur(Paint p) {
+		centralCanva.getGraphicsContext2D().setStroke(p);
 	}
 }
