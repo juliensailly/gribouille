@@ -16,6 +16,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
@@ -58,7 +59,10 @@ public class Controleur implements Initializable {
         epaisseur = new SimpleIntegerProperty(1);
         this.stage = stage;
         this.outilCrayon = new OutilCrayon(this);
+
+        stage.addEventHandler(KeyEvent.KEY_PRESSED, evt -> onKeyPressed(evt.getText()));
     }
+
 
     public void initialize(URL url, ResourceBundle ressourceBundle) {
 
@@ -167,6 +171,50 @@ public class Controleur implements Initializable {
     public void setCouleur(Paint fill) {
         this.couleur = new SimpleObjectProperty<Color>((Color) fill);
         dessinController.setCouleur(fill);
-        statutController.setColorLabel(fill);
+    }
+
+    private void onKeyPressed(String eventTxt) {
+        try {
+            Integer.parseInt(eventTxt);
+            setEpaisseur(eventTxt);
+        } catch(NumberFormatException exception) {
+            switch (eventTxt) {
+                case "c":
+                    onCrayon();
+                    break;
+                case "e":
+                    onEtoile();
+                    break;
+                case "r":
+                    setCouleur(new Color(1, 0, 0, 1));
+                    break;
+                case "v":
+                    setCouleur(new Color(0, 1, 0, 1));
+                    break;
+                case "b":
+                    setCouleur(new Color(0, 0, 1, 1));
+                    break;
+                case "t":
+                    setCouleur(new Color(0, 1, 1, 1));
+                    break;
+                case "m":
+                    setCouleur(new Color(1, 0, 1, 1));
+                    break;
+                case "j":
+                    setCouleur(new Color(1, 1, 0, 1));
+                    break;
+                case "n":
+                    setCouleur(new Color(0, 0, 0, 1));
+                    break;
+                case "w":
+                    setCouleur(new Color(1, 1, 1, 1));
+                    break;
+
+                default:
+                    onCrayon();
+                    setEpaisseur("1");
+                    setCouleur(new Color(255,255,255,1));
+            }
+        }
     }
 }

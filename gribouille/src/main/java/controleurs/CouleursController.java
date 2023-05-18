@@ -41,18 +41,20 @@ public class CouleursController implements Initializable {
 			if (evt.getTarget().getClass().equals(Rectangle.class)) {
 				Rectangle rect = (Rectangle) evt.getTarget();
 				controleur.setCouleur(rect.getFill());
+				controleur.statutController.colorLabel.setText("Couleur : " + rect.getId());
 				rect.setArcHeight(10);
 				rect.setArcWidth(10);
 				rect.setStrokeWidth(5);
 				rect.setHeight(rect.getHeight() - 3);
 				rect.setWidth(rect.getWidth() - 3);
-				if (precedent != null) {
-					precedent.setArcWidth(5);
-					precedent.setArcHeight(5);
-					precedent.setStrokeWidth(1);
-					precedent.setHeight(50);
-					precedent.setWidth(50);
+				if (precedent == null) {
+					precedent = black;
 				}
+				precedent.setArcWidth(5);
+				precedent.setArcHeight(5);
+				precedent.setStrokeWidth(1);
+				precedent.setHeight(50);
+				precedent.setWidth(50);
 				precedent = rect;
 			}
 		});
