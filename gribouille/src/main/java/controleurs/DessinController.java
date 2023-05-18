@@ -39,4 +39,8 @@ public class DessinController {
 	public void trace(double x1, double y1, double x2, double y2) {
 		centralCanva.getGraphicsContext2D().strokeLine(x1, y1, x2, y2);
 	}
+
+	public void setEpaisseur(int epaisseur) {
+		centralCanva.getGraphicsContext2D().setLineWidth(epaisseur);
+	}
 }

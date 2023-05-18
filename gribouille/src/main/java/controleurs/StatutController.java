@@ -20,4 +20,8 @@ public class StatutController {
 	public void setControleur(Controleur c) {
 		this.controleur = c;
 	}
+
+	public void setThicknessLabelValue(String epaisseur) {
+		thicknessLabelValue.setText(epaisseur);
+	}
 }

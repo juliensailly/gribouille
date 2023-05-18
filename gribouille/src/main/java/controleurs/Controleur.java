@@ -104,6 +104,7 @@ public class Controleur implements Initializable {
 
 
             for (int i = 1; i < trace.getPoints().size(); i++) {
+                dessinController.centralCanva.getGraphicsContext2D().setLineWidth(trace.getEpaisseur());
                 if (trace instanceof Trace) {
                     dessinController.centralCanva.getGraphicsContext2D().strokeLine(prevX.get(), prevY.get(),
                             trace.getPoints().get(i).getX(), trace.getPoints().get(i).getY());
@@ -153,5 +154,11 @@ public class Controleur implements Initializable {
     public void onEtoile() {
         outilLabel.set("Outil : Etoile");
         outilCrayon = new OutilEtoile(this);
+    }
+
+    public void setEpaisseur(String value) {
+        this.epaisseur = new SimpleIntegerProperty(Integer.parseInt(value));
+        dessinController.setEpaisseur(Integer.parseInt(value));
+        statutController.setThicknessLabelValue(value);
     }
 }

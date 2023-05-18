@@ -22,7 +22,7 @@
 			<items>
 				<Menu mnemonicParsing="false" text="Épaisseur">
 					<items>
-						<RadioMenuItem mnemonicParsing="false" text="1">
+						<RadioMenuItem mnemonicParsing="false" text="1" selected="true">
 							<toggleGroup>
 								<ToggleGroup fx:id="epaisseur_group" />
 							</toggleGroup>

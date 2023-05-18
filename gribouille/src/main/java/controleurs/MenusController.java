@@ -39,5 +39,10 @@ public class MenusController implements Initializable {
 				controleur.onEtoile();
 			}
 		});
+
+		epaisseur_group.selectedToggleProperty().addListener(obs -> {
+			RadioMenuItem rmi = (RadioMenuItem) epaisseur_group.getSelectedToggle();
+			controleur.setEpaisseur(rmi.getText());
+		});
 	}
 }
