@@ -18,6 +18,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 import outils.OutilCrayon;
@@ -160,5 +161,9 @@ public class Controleur implements Initializable {
         this.epaisseur = new SimpleIntegerProperty(Integer.parseInt(value));
         dessinController.setEpaisseur(Integer.parseInt(value));
         statutController.setThicknessLabelValue(value);
+    }
+
+    public void setCouleur(Paint fill) {
+        this.couleur = new SimpleObjectProperty<Color>((Color) fill);
     }
 }

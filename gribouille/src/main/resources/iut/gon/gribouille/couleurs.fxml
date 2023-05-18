@@ -10,7 +10,8 @@
 <VBox prefHeight="194.0" prefWidth="116.0" spacing="2.0"
 	style="-fx-background-color: #ddd;" xmlns="http://javafx.com/javafx/19"
 	xmlns:fx="http://javafx.com/fxml/1"
-	fx:controller="controleurs.CouleursController">
+	fx:controller="controleurs.CouleursController"
+	fx:id="colorVBox">
 	<children>
 		<ColorPicker fx:id="sideColorPicker" prefHeight="36.0"
 			prefWidth="108.0" />
