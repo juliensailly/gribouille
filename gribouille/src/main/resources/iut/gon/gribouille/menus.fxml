@@ -22,7 +22,7 @@
 			<items>
 				<Menu mnemonicParsing="false" text="Épaisseur">
 					<items>
-						<RadioMenuItem mnemonicParsing="false" text="1">
+						<RadioMenuItem mnemonicParsing="false" selected="true" text="1">
 							<toggleGroup>
 								<ToggleGroup fx:id="epaisseur_group" />
 							</toggleGroup>
@@ -47,7 +47,7 @@
 		</Menu>
 		<Menu mnemonicParsing="false" text="Aide">
 			<items>
-				<MenuItem mnemonicParsing="false" text="À propos" />
+				<MenuItem mnemonicParsing="false" onAction="#onAideClick" text="À propos et raccourcis clavier" />
 			</items>
 		</Menu>
 	</menus>

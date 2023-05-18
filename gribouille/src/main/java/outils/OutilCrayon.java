@@ -28,7 +28,7 @@ public class OutilCrayon extends Outils{
 		prevX.set(evt.getX());
 		prevY.set(evt.getY());
 		index++;
-		controleur.trace = new Trace(1, "noir", evt.getX(), evt.getY());
+		controleur.trace = new Trace(controleur.epaisseur.getValue(), controleur.couleur.getValue().toString(), evt.getX(), evt.getY());
 		controleur.dessin.getFigures().add(controleur.trace);
 	}
 

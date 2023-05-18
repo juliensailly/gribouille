@@ -19,7 +19,7 @@ public class OutilEtoile extends Outils {
 	public void onMousePress(MouseEvent e) {
 		centerX.set(e.getX());
 		centerY.set(e.getY());
-		controleur.etoile = new Etoile(controleur.epaisseur.get(), controleur.couleur.get().toString(), centerX.get(), centerY.get());
+		controleur.etoile = new Etoile(controleur.epaisseur.getValue(), controleur.couleur.get().toString(), centerX.get(), centerY.get());
 		controleur.dessin.addFigure(controleur.etoile);
 	}
 

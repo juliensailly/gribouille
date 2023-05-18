@@ -48,7 +48,7 @@
 			</children>
 		</HBox>
 		<Label fx:id="toolLabel" text="Outil" GridPane.columnIndex="3" />
-		<Label fx:id="colorLabel" text="Couleur"
+		<Label fx:id="colorLabel" text="Couleur : black"
 			GridPane.columnIndex="4" />
 	</children>
 </GridPane>
