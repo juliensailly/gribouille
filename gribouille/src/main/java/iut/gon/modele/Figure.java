@@ -4,65 +4,69 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- Stocke une figure
+ * Stocke une figure
  */
-public abstract class Figure {
-  protected int epaisseur;
-  protected String couleur;
-  protected List<Point> points = new ArrayList<>();
+public class Figure {
+    protected int epaisseur;
+    protected String couleur;
+    protected List<Point> points = new ArrayList<>();
 
-  /**
-   Crée une figure avec une épaisseur et une couleur
-   */
-  public Figure(int epaisseur, String couleur) {
-    this.epaisseur = epaisseur;
-    this.couleur = couleur;
-  }
+    /**
+     * Crée une figure avec une épaisseur et une couleur
+     */
+    public Figure(int epaisseur, String couleur) {
+        this.epaisseur = epaisseur;
+        this.couleur = couleur;
+    }
 
-  /**
-   Retourne l'épaisseur du tracé de la figure
-   */
-  public int getEpaisseur() {
-    return epaisseur;
-  }
+    /**
+     * Retourne l'épaisseur du tracé de la figure
+     */
+    public int getEpaisseur() {
+        return epaisseur;
+    }
 
-  /**
-   Retourne la couleur du tracé de la figure
+    /**
+     * Retourne la couleur du tracé de la figure
+     *
+     * @return un int représentant la couleur de la figure
+     */
+    public String getCouleur() {
+        return couleur;
+    }
 
-   @return un int représentant la couleur de la figure
-   */
-  public String getCouleur() {
-    return couleur;
-  }
+    /**
+     * Retourne les points de la figure dans l'ordre du tracé
+     */
+    public List<Point> getPoints() {
+        return points;
+    }
 
-  /**
-   Retourne les points de la figure dans l'ordre du tracé
-   */
-  public List<Point> getPoints() {
-    return points;
-  }
+    /**
+     * Ajoute un nouveau point à la fin du tracé
+     */
+    public void addPoint(Point nouveau) {
+        points.add(nouveau);
+    }
 
-  /**
-   Ajoute un nouveau point à la fin du tracé
-   */
-  public void addPoint(Point nouveau) {
-    points.add(nouveau);
-  }
+    /**
+     * Ajoute un nouveau point à la fin du tracé
+     */
+    public void addPoint(double x, double y) {
+        addPoint(new Point(x, y));
+    }
 
-  /**
-   Ajoute un nouveau point à la fin du tracé
-   */
-  public void addPoint(double x, double y) {
-    addPoint(new Point(x, y));
-  }
+    /**
+     * Crée une nouvelle figure qui continue la figure courante avec une nouvelle couleur
+     */
+    public Figure changeCouleur(String nouvelleCouleur) {
+        return new Figure(getEpaisseur(), nouvelleCouleur);
+    }
 
-  /**
-   Crée une nouvelle figure qui continue la figure courante avec une nouvelle couleur
-   */
-  public abstract Figure changeCouleur(String nouvelleCouleur);
-
-  /**
-   Crée une nouvelle figure qui continue la figure courante avec une nouvelle couleur
-   */
-  public abstract Figure changeEpaisseur(int nouvelleEpaisseur);
+    /**
+     * Crée une nouvelle figure qui continue la figure courante avec une nouvelle couleur
+     */
+    public Figure changeEpaisseur(int nouvelleEpaisseur) {
+        return new Figure(nouvelleEpaisseur, getCouleur());
+    }
 } // public class Figure
