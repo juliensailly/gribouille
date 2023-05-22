@@ -186,43 +186,49 @@ public class Controleur implements Initializable {
                     onEtoile();
                     break;
                 case "r":
-                    setCouleur(new Color(1, 0, 0, 1));
+                    setCouleur(Color.RED);
                     statutController.colorLabel.setText("Couleur : red");
                     break;
                 case "v":
-                    setCouleur(new Color(0, 1, 0, 1));
+                    setCouleur(Color.GREEN);
                     statutController.colorLabel.setText("Couleur : green");
                     break;
                 case "b":
-                    setCouleur(new Color(0, 0, 1, 1));
+                    setCouleur(Color.BLUE);
                     statutController.colorLabel.setText("Couleur : blue");
                     break;
                 case "t":
-                    setCouleur(new Color(0, 1, 1, 1));
+                    setCouleur(Color.CYAN);
                     statutController.colorLabel.setText("Couleur : cyan");
                     break;
                 case "m":
-                    setCouleur(new Color(1, 0, 1, 1));
+                    setCouleur(Color.MAGENTA);
                     statutController.colorLabel.setText("Couleur : magenta");
                     break;
                 case "j":
-                    setCouleur(new Color(1, 1, 0, 1));
+                    setCouleur(Color.YELLOW);
                     statutController.colorLabel.setText("Couleur : yellow");
                     break;
                 case "n":
-                    setCouleur(new Color(0, 0, 0, 1));
+                    setCouleur(Color.BLACK);
                     statutController.colorLabel.setText("Couleur : black");
                     break;
                 case "w":
-                    setCouleur(new Color(1, 1, 1, 1));
+                    setCouleur(Color.WHITE);
                     statutController.colorLabel.setText("Couleur : white");
                     break;
                 default:
                     onCrayon();
                     setEpaisseur("1");
-                    setCouleur(new Color(0,0,0,1));
+                    setCouleur(Color.BLACK);
                     statutController.colorLabel.setText("Couleur : black");
             }
         }
     }
 }
+
+/*
+To-Do List :
+- Update les menus quand on change d'outil ou d'épaisseur
+- Permettre le changement d'outil, couleurs et épaisseurs à la volée
+ */
