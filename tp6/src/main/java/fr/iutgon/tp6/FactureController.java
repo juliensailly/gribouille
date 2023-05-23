@@ -28,27 +28,30 @@ import java.util.Random;
 import java.util.ResourceBundle;
 
 public class FactureController implements Initializable {
-  public TableView<Ligne> table;
-  public TableColumn<Ligne, Integer> qte;
-  public TableColumn<Ligne, Produit> produit;
-  public TableColumn<Ligne, Number> prixUnitaire;
-  public TableColumn<Ligne, Number> totalHT;
-  public TableColumn<Ligne, Number> totalTTC;
-  public TextField sommeFacture;
+    public TableView<Ligne> table;
+    public TableColumn<Ligne, Integer> qte;
+    public TableColumn<Ligne, Produit> produit;
+    public TableColumn<Ligne, Number> prixUnitaire;
+    public TableColumn<Ligne, Number> totalHT;
+    public TableColumn<Ligne, Number> totalTTC;
+    public TextField sommeFacture;
 
-  /**
-   Called to initialize a controller after its root element has been completely processed.
+    /**
+     * Called to initialize a controller after its root element has been completely processed.
+     *
+     * @param location  The location used to resolve relative paths for the root object, or
+     *                  {@code null} if the location is not known.
+     * @param resources The resources used to localize the root object, or {@code null} if
+     */
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        //TODO préparer la table
+    }
 
-   @param location  The location used to resolve relative paths for the root object, or
-   {@code null} if the location is not known.
-   @param resources The resources used to localize the root object, or {@code null} if
-   */
-  @Override
-  public void initialize(URL location, ResourceBundle resources) {
-    //TODO préparer la table
-  }
-
-  public void onAjouter(ActionEvent actionEvent) {
-    //TODO ajouter un produit aléatoire à la table
-  }
+    public void onAjouter(ActionEvent actionEvent) {
+        //TODO ajouter un produit aléatoire à la table
+        Random rd = new Random();
+        Ligne ligne = new Ligne(rd.nextInt(500), FabriqueProduits.getProduits().get(rd.nextInt(FabriqueProduits.getProduits().size() - 1)));
+        table.getItems().add(ligne);
+    }
 }
