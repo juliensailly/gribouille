@@ -11,6 +11,7 @@
 	<menus>
 		<Menu mnemonicParsing="false" text="Dessin">
 			<items>
+				<MenuItem mnemonicParsing="false" text="Nouveau dessin" onAction="#onNouveauDessin"/>
 				<MenuItem mnemonicParsing="false" text="Charger" />
 				<MenuItem mnemonicParsing="false" text="Sauvegarder" />
 				<MenuItem mnemonicParsing="false" text="Exporter" />

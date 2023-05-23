@@ -1,11 +1,16 @@
 package controleurs;
 
 import java.net.URL;
+import java.util.List;
 import java.util.ResourceBundle;
 
+import iut.gon.modele.Dessin;
+import iut.gon.modele.Figure;
+import iut.gon.modele.Trace;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 
 public class MenusController implements Initializable {
     @FXML
@@ -67,5 +72,17 @@ public class MenusController implements Initializable {
         helpDialog.setWidth(500);
         helpDialog.setHeight(600);
         helpDialog.showAndWait();
+    }
+
+    public void onNouveauDessin() {
+        controleur.dessinController.centralCanva.getGraphicsContext2D().clearRect(0, 0, controleur.dessinController.centralCanva.getWidth(),
+                controleur.dessinController.centralCanva.getHeight());
+//        List<Figure> listTemp = controleur.dessin.getFigures();
+//        for (Figure figure : listTemp) {
+//            controleur.dessin.getFigures().remove(figure);
+//        }
+        for (int i = 0; i < controleur.dessin.getFigures().size(); i++) {
+            controleur.dessin.getFigures().remove(i);
+        }
     }
 }
