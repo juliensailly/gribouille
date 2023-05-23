@@ -6,6 +6,7 @@ import fr.iutgon.tp6.modele.Produit;
 import javafx.beans.binding.Bindings;
 import javafx.beans.binding.NumberExpression;
 import javafx.beans.property.ReadOnlyIntegerWrapper;
+import javafx.beans.property.SimpleFloatProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -53,5 +54,16 @@ public class FactureController implements Initializable {
         Random rd = new Random();
         Ligne ligne = new Ligne(rd.nextInt(500), FabriqueProduits.getProduits().get(rd.nextInt(FabriqueProduits.getProduits().size() - 1)));
         table.getItems().add(ligne);
+
+        qte.setCellValueFactory(new PropertyValueFactory<>("qte"));
+        Callback<TableColumn.CellDataFeatures<Ligne, Produit>, ObservableValue<Produit>> callback =
+                ligneProduitCellDataFeatures -> {
+                    return ligneProduitCellDataFeatures.getValue().produitProperty();
+                };
+        produit.setCellValueFactory(callback);
+
+        prixUnitaire.setCellValueFactory(ligneProduitCellDataFeatures -> ligneProduitCellDataFeatures.getValue().getProduit().prixProperty());
+        totalHT.setCellValueFactory(ligneProduitCellDataFeatures -> ligneProduitCellDataFeatures.getValue().totalHTProperty());
+        totalTTC.setCellValueFactory(ligneProduitCellDataFeatures -> ligneProduitCellDataFeatures.getValue().totalTTCProperty());
     }
 }
