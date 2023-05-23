@@ -62,8 +62,29 @@ public class FactureController implements Initializable {
                 };
         produit.setCellValueFactory(callback);
 
-        prixUnitaire.setCellValueFactory(ligneProduitCellDataFeatures -> ligneProduitCellDataFeatures.getValue().getProduit().prixProperty());
-        totalHT.setCellValueFactory(ligneProduitCellDataFeatures -> ligneProduitCellDataFeatures.getValue().totalHTProperty());
-        totalTTC.setCellValueFactory(ligneProduitCellDataFeatures -> ligneProduitCellDataFeatures.getValue().totalTTCProperty());
+        prixUnitaire.setCellValueFactory(ligneProduitCellDataFeatures ->
+                ligneProduitCellDataFeatures.getValue().getProduit().prixProperty());
+        totalHT.setCellValueFactory(ligneProduitCellDataFeatures ->
+                ligneProduitCellDataFeatures.getValue().totalHTProperty());
+        totalTTC.setCellValueFactory(ligneProduitCellDataFeatures ->
+                ligneProduitCellDataFeatures.getValue().totalTTCProperty());
+
+        qte.setCellFactory(cell -> new TextFieldTableCell<>(new IntegerStringConverter()));
+        produit.setCellFactory(cell -> new ChoiceBoxTableCell<>(new StringConverter<Produit>() {
+            @Override
+            public String toString(Produit object) {
+                return object.getNom();
+            }
+
+            @Override
+            public Produit fromString(String string) {
+                for (Ligne ligne : table.getItems()) {
+                    if (ligne.getProduit().getNom().equals(string)) {
+                        return ligne.getProduit();
+                    }
+                }
+                return null;
+            }
+        }, FXCollections.observableList(FabriqueProduits.getProduits())));
     }
 }
