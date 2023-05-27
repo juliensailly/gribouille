@@ -4,16 +4,11 @@ import fr.iutgon.tp6.modele.FabriqueProduits;
 import fr.iutgon.tp6.modele.Ligne;
 import fr.iutgon.tp6.modele.Produit;
 import javafx.beans.binding.Bindings;
-import javafx.beans.binding.NumberExpression;
-import javafx.beans.property.ReadOnlyIntegerWrapper;
-import javafx.beans.property.SimpleFloatProperty;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
-import javafx.css.PseudoClass;
 import javafx.event.ActionEvent;
 import javafx.fxml.Initializable;
-import javafx.scene.control.TableCell;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -25,6 +20,7 @@ import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
+import java.util.EventListener;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -47,6 +43,7 @@ public class FactureController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         //TODO préparer la table
+        sommeFacture.setText("0.0 €");
     }
 
     public void onAjouter(ActionEvent actionEvent) {
@@ -86,5 +83,17 @@ public class FactureController implements Initializable {
                 return null;
             }
         }, FXCollections.observableList(FabriqueProduits.getProduits())));
+
+        // Je n'ai pas réussi à utiliser le Bindings.add()
+        ligne.totalTTCProperty().addListener(evt -> updateSum());
+        updateSum();
+    }
+
+    public void updateSum() {
+        double sum = 0;
+        for (Ligne line : table.getItems()) {
+            sum += line.getTotalTTC().doubleValue();
+        }
+        sommeFacture.setText(String.format("%.2f", sum) + " €");
     }
 }
