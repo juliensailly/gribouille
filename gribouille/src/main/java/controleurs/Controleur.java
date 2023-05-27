@@ -87,14 +87,9 @@ public class Controleur implements Initializable {
         prevX.set(0);
         prevY.set(0);
 
-        stage.setOnCloseRequest(windowEvent -> {
-            if (!Dialogues.confirmation()) {
-                windowEvent.consume();
-            }
-        });
+        stage.setOnCloseRequest(windowEvent -> onQuitter());
 
         Bindings.bindBidirectional(statutController.thicknessLabelValue.textProperty(), epaisseur, new NumberStringConverter());
-        //statutController.colorLabel.textProperty().bind(couleur.asString());
         outilLabel = new SimpleStringProperty("Outil : Crayon");
         statutController.toolLabel.textProperty().bind(outilLabel);
     }
@@ -152,9 +147,15 @@ public class Controleur implements Initializable {
      * Fonction permettant de fermer la fenêtre depuis le menu.
      */
     public void onQuitter() {
-        if (Dialogues.confirmation()) {
+        if (!dessin.getEstModifie()) {
             Platform.exit();
+            return;
         }
+
+        if (Dialogues.exitFileModified()) {
+            sauvegarde();
+        }
+        Platform.exit();
     }
 
     public void onCrayon() {
