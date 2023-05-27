@@ -1,6 +1,7 @@
 package controleurs;
 
 import java.io.File;
+import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,8 +16,12 @@ import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
 import javafx.beans.property.*;
 import javafx.beans.value.ObservableBooleanValue;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
@@ -239,7 +244,8 @@ public class Controleur implements Initializable {
     public void sauvegarde() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Emplacement de la sauvegarde");
-        fc.setInitialFileName("Sauvegarde_Gribouille_" + System.currentTimeMillis() + ".grb");
+        fc.setInitialFileName("Sauvegarde_Gribouille_" + System.currentTimeMillis());
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("GRB Save", ".grb"));
         fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
         File file = fc.showSaveDialog(stage);
         if (file == null) return;
@@ -250,6 +256,7 @@ public class Controleur implements Initializable {
         FileChooser fc = new FileChooser();
         fc.setTitle("Choix de la sauvegarde à charger");
         fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("GRB Save", ".grb"));
         File file = fc.showOpenDialog(stage);
         if (file == null) return;
         dessin.charge(file.getAbsolutePath());
@@ -261,6 +268,33 @@ public class Controleur implements Initializable {
                 dessinController.centralCanva.getHeight());
         dessin.setFigures(new ArrayList<Figure>());
         dessin.setEstModifie(false);
+    }
+
+    public void onExporter() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Choix de l'emplacement de l'export");
+        fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG File", ".png"));
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG File", ".jpg"));
+        fc.setInitialFileName("Capture_Gribouille_"+System.currentTimeMillis());
+        WritableImage dessinCapture = dessinController.centralCanva.snapshot(new SnapshotParameters(), null);
+        File file = fc.showSaveDialog(stage);
+        if (file == null) return;
+        try {
+            javax.imageio.ImageIO.write(SwingFXUtils.fromFXImage(dessinCapture, null), "png", file);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Enregistrement réussi");
+            alert.setHeaderText("Enregistrement de la capture réussi.");
+            alert.setContentText("L'enregistrement de la capture de votre dessin a bien été effectué.");
+            alert.showAndWait();
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Problème d'enregistrement");
+            alert.setHeaderText("Problème lors de l'export de l'image.");
+            alert.setContentText("Un problème est survenue lors de l'export de la capture de votre dessin.");
+            alert.showAndWait();
+        }
+
     }
 }
 
