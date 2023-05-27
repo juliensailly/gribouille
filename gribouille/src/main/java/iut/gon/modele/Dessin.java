@@ -112,6 +112,7 @@ public class Dessin {
 			figures.forEach(f->f.sauve(out));
 			out.close();
 			this.fichier = nouveauFichier;
+			setNomDuFichier(nouveauFichier.getName());
 			estModifie.set(false);
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

@@ -27,7 +27,7 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("CadreGribouille.fxml"));
 
         Dessin dessin = new Dessin();
-        dessin.setNomDuFichier("nomFichier.txt");
+        dessin.setNomDuFichier("Gribouille");
 
         Controleur controlleur = new Controleur(stage, dessin);
 
