@@ -1,6 +1,10 @@
 package controleurs;
 
+import java.io.File;
+import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import iut.gon.gribouille.Dialogues;
@@ -10,16 +14,19 @@ import iut.gon.modele.Figure;
 import iut.gon.modele.Trace;
 import javafx.application.Platform;
 import javafx.beans.binding.Bindings;
-import javafx.beans.property.SimpleDoubleProperty;
-import javafx.beans.property.SimpleIntegerProperty;
-import javafx.beans.property.SimpleObjectProperty;
-import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.*;
+import javafx.beans.value.ObservableBooleanValue;
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.SnapshotParameters;
+import javafx.scene.control.Alert;
+import javafx.scene.image.WritableImage;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 import outils.OutilCrayon;
@@ -66,6 +73,11 @@ public class Controleur implements Initializable {
 
     public void initialize(URL url, ResourceBundle ressourceBundle) {
 
+        stage.titleProperty().bind(dessin.nomDuFichierProperty());
+        stage.titleProperty().bind(Bindings.when(dessin.estModifieProperty())
+                .then(Bindings.concat(dessin.nomDuFichierProperty(), "*"))
+                .otherwise(dessin.nomDuFichierProperty()));
+
         couleursController.setControleur(this);
         dessinController.setControleur(this);
         menusController.setControleur(this);
@@ -82,14 +94,9 @@ public class Controleur implements Initializable {
         prevX.set(0);
         prevY.set(0);
 
-        stage.setOnCloseRequest(windowEvent -> {
-            if (!Dialogues.confirmation()) {
-                windowEvent.consume();
-            }
-        });
+        stage.setOnCloseRequest(windowEvent -> onQuitter());
 
         Bindings.bindBidirectional(statutController.thicknessLabelValue.textProperty(), epaisseur, new NumberStringConverter());
-        //statutController.colorLabel.textProperty().bind(couleur.asString());
         outilLabel = new SimpleStringProperty("Outil : Crayon");
         statutController.toolLabel.textProperty().bind(outilLabel);
     }
@@ -147,9 +154,15 @@ public class Controleur implements Initializable {
      * Fonction permettant de fermer la fenêtre depuis le menu.
      */
     public void onQuitter() {
-        if (Dialogues.confirmation()) {
+        if (!dessin.getEstModifie()) {
             Platform.exit();
+            return;
         }
+
+        if (Dialogues.exitFileModified()) {
+            sauvegarde();
+        }
+        Platform.exit();
     }
 
     public void onCrayon() {
@@ -177,13 +190,15 @@ public class Controleur implements Initializable {
         try {
             Integer.parseInt(eventTxt);
             setEpaisseur(eventTxt);
-        } catch(NumberFormatException exception) {
+        } catch (NumberFormatException exception) {
             switch (eventTxt) {
                 case "c":
                     onCrayon();
+                    menusController.crayon.setSelected(true);
                     break;
                 case "e":
                     onEtoile();
+                    menusController.etoile.setSelected(true);
                     break;
                 case "r":
                     setCouleur(Color.RED);
@@ -224,6 +239,62 @@ public class Controleur implements Initializable {
                     statutController.colorLabel.setText("Couleur : black");
             }
         }
+    }
+
+    public void sauvegarde() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Emplacement de la sauvegarde");
+        fc.setInitialFileName("Sauvegarde_Gribouille_" + System.currentTimeMillis());
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("GRB Save", ".grb"));
+        fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
+        File file = fc.showSaveDialog(stage);
+        if (file == null) return;
+        dessin.sauveSous(file.getAbsolutePath());
+    }
+
+    public void charge() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Choix de la sauvegarde à charger");
+        fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("GRB Save", ".grb"));
+        File file = fc.showOpenDialog(stage);
+        if (file == null) return;
+        dessin.charge(file.getAbsolutePath());
+        reDraw();
+    }
+
+    public void onEffacerToile() {
+        dessinController.centralCanva.getGraphicsContext2D().clearRect(0, 0, dessinController.centralCanva.getWidth(),
+                dessinController.centralCanva.getHeight());
+        dessin.setFigures(new ArrayList<Figure>());
+        dessin.setEstModifie(false);
+    }
+
+    public void onExporter() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Choix de l'emplacement de l'export");
+        fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG File", ".png"));
+        fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG File", ".jpg"));
+        fc.setInitialFileName("Capture_Gribouille_"+System.currentTimeMillis());
+        WritableImage dessinCapture = dessinController.centralCanva.snapshot(new SnapshotParameters(), null);
+        File file = fc.showSaveDialog(stage);
+        if (file == null) return;
+        try {
+            javax.imageio.ImageIO.write(SwingFXUtils.fromFXImage(dessinCapture, null), "png", file);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Enregistrement réussi");
+            alert.setHeaderText("Enregistrement de la capture réussi.");
+            alert.setContentText("L'enregistrement de la capture de votre dessin a bien été effectué.");
+            alert.showAndWait();
+        } catch (IOException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("Problème d'enregistrement");
+            alert.setHeaderText("Problème lors de l'export de l'image.");
+            alert.setContentText("Un problème est survenue lors de l'export de la capture de votre dessin.");
+            alert.showAndWait();
+        }
+
     }
 }
 
