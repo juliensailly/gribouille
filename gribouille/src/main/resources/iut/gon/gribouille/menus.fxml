@@ -11,6 +11,8 @@
 	<menus>
 		<Menu mnemonicParsing="false" text="Dessin">
 			<items>
+            <MenuItem mnemonicParsing="false" onAction="#onEffacerToile" text="Effacer la toile" />
+            <SeparatorMenuItem mnemonicParsing="false" />
 				<MenuItem mnemonicParsing="false" onAction="#onChargerClick" text="Charger" />
 				<MenuItem mnemonicParsing="false" onAction="#onSauvegardeClick" text="Sauvegarder" />
 				<MenuItem mnemonicParsing="false" text="Exporter" />

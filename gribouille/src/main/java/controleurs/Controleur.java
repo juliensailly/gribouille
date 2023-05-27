@@ -2,6 +2,8 @@ package controleurs;
 
 import java.io.File;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import iut.gon.gribouille.Dialogues;
@@ -183,13 +185,15 @@ public class Controleur implements Initializable {
         try {
             Integer.parseInt(eventTxt);
             setEpaisseur(eventTxt);
-        } catch(NumberFormatException exception) {
+        } catch (NumberFormatException exception) {
             switch (eventTxt) {
                 case "c":
                     onCrayon();
+                    menusController.crayon.setSelected(true);
                     break;
                 case "e":
                     onEtoile();
+                    menusController.etoile.setSelected(true);
                     break;
                 case "r":
                     setCouleur(Color.RED);
@@ -235,7 +239,7 @@ public class Controleur implements Initializable {
     public void sauvegarde() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Emplacement de la sauvegarde");
-        fc.setInitialFileName("Sauvegarde_Gribouille_"+System.currentTimeMillis()+".grb");
+        fc.setInitialFileName("Sauvegarde_Gribouille_" + System.currentTimeMillis() + ".grb");
         fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
         File file = fc.showSaveDialog(stage);
         if (file == null) return;
@@ -250,6 +254,13 @@ public class Controleur implements Initializable {
         if (file == null) return;
         dessin.charge(file.getAbsolutePath());
         reDraw();
+    }
+
+    public void onEffacerToile() {
+        dessinController.centralCanva.getGraphicsContext2D().clearRect(0, 0, dessinController.centralCanva.getWidth(),
+                dessinController.centralCanva.getHeight());
+        dessin.setFigures(new ArrayList<Figure>());
+        dessin.setEstModifie(false);
     }
 }
 

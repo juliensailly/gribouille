@@ -75,4 +75,6 @@ public class MenusController implements Initializable {
     }
 
     public void onChargerClick() { controleur.charge(); }
+
+    public void onEffacerToile() { controleur.onEffacerToile(); }
 }
