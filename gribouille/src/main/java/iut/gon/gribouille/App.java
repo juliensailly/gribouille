@@ -27,15 +27,13 @@ public class App extends Application {
         FXMLLoader fxmlLoader = new FXMLLoader(App.class.getResource("CadreGribouille.fxml"));
 
         Dessin dessin = new Dessin();
-        dessin.setNomDuFichier("Gribouille");
+        dessin.setNomDuFichier("Gribouille - Nouveau fichier");
 
         Controleur controlleur = new Controleur(stage, dessin);
 
         fxmlLoader.setController(controlleur);
 
         scene = new Scene(fxmlLoader.load());
-
-        stage.titleProperty().bind(dessin.nomDuFichierProperty());
 
         stage.setScene(scene);
         stage.getIcons().add(new Image("file:src\\main\\resources\\iut\\gon\\gribouille\\icon.png"));
