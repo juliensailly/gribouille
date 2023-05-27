@@ -2,8 +2,10 @@ package fr.iutgon.tp6;
 
 import fr.iutgon.tp6.modele.FabriqueProduits;
 import fr.iutgon.tp6.modele.Ligne;
+import fr.iutgon.tp6.modele.MonetaryType;
 import fr.iutgon.tp6.modele.Produit;
 import javafx.beans.binding.Bindings;
+import javafx.beans.binding.NumberExpression;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
