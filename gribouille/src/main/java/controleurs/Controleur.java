@@ -240,6 +240,16 @@ public class Controleur implements Initializable {
         if (file == null) return;
         dessin.sauveSous(file.getAbsolutePath());
     }
+
+    public void charge() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Choix de la sauvegarde à charger");
+        fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
+        File file = fc.showOpenDialog(stage);
+        if (file == null) return;
+        dessin.charge(file.getAbsolutePath());
+        reDraw();
+    }
 }
 
 /*
