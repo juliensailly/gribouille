@@ -1,4 +1,4 @@
-module iut.gon.gribouille_tp1 {
+module iut.gon.gribouille {
     requires javafx.controls;
     requires javafx.fxml;
 	requires java.base;

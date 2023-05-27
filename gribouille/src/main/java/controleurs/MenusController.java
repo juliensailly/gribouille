@@ -68,4 +68,8 @@ public class MenusController implements Initializable {
         helpDialog.setHeight(600);
         helpDialog.showAndWait();
     }
+
+    public void onSauvegardeClick() {
+        controleur.sauvegarde();
+    }
 }

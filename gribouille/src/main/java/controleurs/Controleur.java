@@ -1,5 +1,6 @@
 package controleurs;
 
+import java.io.File;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -20,6 +21,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import javafx.util.converter.NumberStringConverter;
 import outils.OutilCrayon;
@@ -224,6 +226,16 @@ public class Controleur implements Initializable {
                     statutController.colorLabel.setText("Couleur : black");
             }
         }
+    }
+
+    public void sauvegarde() {
+        FileChooser fc = new FileChooser();
+        fc.setTitle("Emplacement de la sauvegarde");
+        fc.setInitialFileName("Sauvegarde_Gribouille_"+System.currentTimeMillis()+".grb");
+        fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
+        File file = fc.showSaveDialog(stage);
+        if (file == null) return;
+        dessin.sauveSous(file.getAbsolutePath());
     }
 }
 

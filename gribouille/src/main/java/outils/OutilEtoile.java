@@ -6,8 +6,8 @@ import javafx.beans.property.SimpleDoubleProperty;
 import javafx.scene.input.MouseEvent;
 
 public class OutilEtoile extends Outils {
-	private SimpleDoubleProperty centerX;
-	private SimpleDoubleProperty centerY;
+	private final SimpleDoubleProperty centerX;
+	private final SimpleDoubleProperty centerY;
 
 	public OutilEtoile(Controleur controleur) {
 		super(controleur);
