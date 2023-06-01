@@ -246,7 +246,7 @@ public class Controleur implements Initializable {
         fc.setTitle("Emplacement de la sauvegarde");
         fc.setInitialFileName("Sauvegarde_Gribouille_" + System.currentTimeMillis());
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("GRB Save", ".grb"));
-        fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
+//        fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
         File file = fc.showSaveDialog(stage);
         if (file == null) return;
         dessin.sauveSous(file.getAbsolutePath());
@@ -255,7 +255,7 @@ public class Controleur implements Initializable {
     public void charge() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Choix de la sauvegarde à charger");
-        fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
+//        fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("GRB Save", ".grb"));
         File file = fc.showOpenDialog(stage);
         if (file == null) return;
@@ -273,7 +273,7 @@ public class Controleur implements Initializable {
     public void onExporter() {
         FileChooser fc = new FileChooser();
         fc.setTitle("Choix de l'emplacement de l'export");
-        fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
+//        fc.setInitialDirectory(new File("D:/Dossiers Personnels/Téléchargements"));
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("PNG File", ".png"));
         fc.getExtensionFilters().add(new FileChooser.ExtensionFilter("JPG File", ".jpg"));
         fc.setInitialFileName("Capture_Gribouille_"+System.currentTimeMillis());
