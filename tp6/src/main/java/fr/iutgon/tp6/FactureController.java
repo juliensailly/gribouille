@@ -2,11 +2,8 @@ package fr.iutgon.tp6;
 
 import fr.iutgon.tp6.modele.FabriqueProduits;
 import fr.iutgon.tp6.modele.Ligne;
-import fr.iutgon.tp6.modele.MonetaryType;
 import fr.iutgon.tp6.modele.Produit;
-import javafx.beans.binding.Bindings;
-import javafx.beans.binding.NumberExpression;
-import javafx.beans.value.ChangeListener;
+import fr.iutgon.tp6.modele.TypeMonetaire;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
@@ -22,7 +19,6 @@ import javafx.util.StringConverter;
 import javafx.util.converter.IntegerStringConverter;
 
 import java.net.URL;
-import java.util.EventListener;
 import java.util.Random;
 import java.util.ResourceBundle;
 
@@ -46,6 +42,11 @@ public class FactureController implements Initializable {
     public void initialize(URL location, ResourceBundle resources) {
         //TODO préparer la table
         sommeFacture.setText("0.0 €");
+        initialiserTableau();
+    }
+
+    private void initialiserTableau() {
+
     }
 
     public void onAjouter(ActionEvent actionEvent) {
@@ -85,6 +86,10 @@ public class FactureController implements Initializable {
                 return null;
             }
         }, FXCollections.observableList(FabriqueProduits.getProduits())));
+
+        prixUnitaire.setCellFactory(ligneNumberTableColumn -> new TypeMonetaire<Ligne>());
+        totalHT.setCellFactory(ligneNumberTableColumn -> new TypeMonetaire<Ligne>());
+        totalTTC.setCellFactory(ligneNumberTableColumn -> new TypeMonetaire<Ligne>());
 
         // Je n'ai pas réussi à utiliser le Bindings.add()
         ligne.totalTTCProperty().addListener(evt -> updateSum());
