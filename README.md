@@ -13,29 +13,7 @@ Fonctionnalités principales
 *   Étoiles : Gribouille propose une fonctionnalité spéciale pour créer des étoiles éblouissantes et ajouter de la magie à vos œuvres d'art.
 *   Génération d'images : Vous pouvez générer des images de haute qualité de vos dessins et les partager avec vos amis.
 *   Sauvegardes : Gribouille vous permet de sauvegarder vos créations pour les revoir plus tard ou les partager avec d'autres personnes.
-*   Chargement de sauvegardes : Vous pouvez charger des sauvegardes précédentes et continuer à travailler sur vos chefs-d'œuvre.    
-
-Exemples d'utilisation
-----------------------
-
-Voici quelques exemples pour vous aider à démarrer avec Gribouille :
-
-*   Dessin à la souris :
-    
-    `// TODO: Ajoutez un exemple de code ici`
-    
-*   Création d'une étoile :
-    
-    `// TODO: Ajoutez un exemple de code ici`
-    
-*   Génération d'une image à partir d'un dessin :
-    
-    `// TODO: Ajoutez un exemple de code ici`
-    
-*   Sauvegarde et chargement d'un dessin :
-    
-    `// TODO: Ajoutez un exemple de code ici`
-    
+*   Chargement de sauvegardes : Vous pouvez charger des sauvegardes précédentes et continuer à travailler sur vos chefs-d'œuvre.        
 
 Contributions
 -------------
